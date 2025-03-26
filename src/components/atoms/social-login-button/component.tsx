@@ -3,7 +3,7 @@ import { SocialLoginButtonProps } from "./types";
 
 export function SocialLoginButton({ icon, text }: SocialLoginButtonProps) {
   return (
-    <Button variant="outline" className="w-full flex gap-2">
+    <Button variant="outline" className="w-full flex gap-2" disabled={true}>
       {icon}
       {text}
     </Button>
