@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '🏗️👷 Styling and linting your affected projects before committing'
+
+# Run checks only on staged-files
+yarn lint-staged ||
+(
+        echo '🧪🔥 Linting the staged files failed 🧪🔥
+                 Make the required changes listed above, add changes and try to commit again.'
+        false;
+)
