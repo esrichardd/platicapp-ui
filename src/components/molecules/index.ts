@@ -1,1 +1,1 @@
-export * from "./social-login/components";
+export * from './social-login/components'

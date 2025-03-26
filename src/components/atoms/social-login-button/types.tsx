@@ -1,4 +1,4 @@
 export type SocialLoginButtonProps = {
-  icon: React.ReactNode;
-  text: string;
-};
+  icon: React.ReactNode
+  text: string
+}

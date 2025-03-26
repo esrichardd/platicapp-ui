@@ -1,12 +1,12 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { TextInputProps } from "./types";
-import { cn } from "@/lib/helpers/shadcn-utils";
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { TextInputProps } from './types'
+import { cn } from '@/lib/helpers/shadcn-utils'
 
 export function TextInput({
   id,
   label,
-  type = "text",
+  type = 'text',
   placeholder,
   required,
   value,
@@ -16,7 +16,7 @@ export function TextInput({
   ...props
 }: TextInputProps) {
   return (
-    <div className="grid gap-2">
+    <div className='grid gap-2'>
       <Label htmlFor={id}>{label}</Label>
       <Input
         id={id}
@@ -26,12 +26,12 @@ export function TextInput({
         value={value}
         onChange={onChange}
         className={cn(
-          error && "border-destructive focus-visible:ring-destructive",
-          className
+          error && 'border-destructive focus-visible:ring-destructive',
+          className,
         )}
         {...props}
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && <p className='text-destructive text-sm'>{error}</p>}
     </div>
-  );
+  )
 }

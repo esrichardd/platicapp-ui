@@ -1,49 +1,49 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { login } from "@/services/auth/login";
-import { cn } from "@/lib/helpers/shadcn-utils";
+import { useState } from 'react'
+import { login } from '@/services/auth/login'
+import { cn } from '@/lib/helpers/shadcn-utils'
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
-import { SocialLogin } from "@/components/molecules";
-import { TermsAndConditions, TextDivider } from "@/components/atoms";
-import { LoginFields } from "./fields";
-import { LoginActions } from "./actions";
+} from '@/components/ui/card'
+import { SocialLogin } from '@/components/molecules'
+import { TermsAndConditions, TextDivider } from '@/components/atoms'
+import { LoginFields } from './fields'
+import { LoginActions } from './actions'
 
 export function LoginForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+}: React.ComponentPropsWithoutRef<'div'>) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    await login({ email, password });
-    setIsLoading(false);
-  };
+    e.preventDefault()
+    setIsLoading(true)
+    await login({ email, password })
+    setIsLoading(false)
+  }
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Bienvenido de nuevo</CardTitle>
+        <CardHeader className='text-center'>
+          <CardTitle className='text-xl'>Bienvenido de nuevo</CardTitle>
           <CardDescription>
             Inicia sesión con tu cuenta de Apple o Google
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
-            <div className="grid gap-6">
+            <div className='grid gap-6'>
               <SocialLogin />
-              <TextDivider text="O continua con" />
+              <TextDivider text='O continua con' />
               <LoginFields
                 email={email}
                 setEmail={setEmail}
@@ -57,5 +57,5 @@ export function LoginForm({
       </Card>
       <TermsAndConditions />
     </div>
-  );
+  )
 }
