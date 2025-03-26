@@ -6,14 +6,14 @@ import { cn } from '@/lib/helpers/shadcn-utils'
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/components/ui/card'
-import { SocialLogin } from '@/components/molecules'
 import { TermsAndConditions, TextDivider } from '@/components/atoms'
-import { LoginFields } from './fields'
+import { SocialLogin } from '@/components/molecules'
 import { LoginActions } from './actions'
+import { LoginFields } from './fields'
 
 export function LoginForm({
   className,

@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { logout } from '@/services/auth/logout'
+import { Button } from '@/components/ui/button'
 
 export function DashboardTemplate() {
   const handleLogout = async () => {

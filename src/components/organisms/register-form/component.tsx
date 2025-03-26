@@ -1,19 +1,19 @@
 'use client'
 
 import { useState } from 'react'
+import { register } from '@/services/auth/register'
 import { cn } from '@/lib/helpers/shadcn-utils'
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from '@/components/ui/card'
-import { SocialLogin } from '@/components/molecules'
-import { register } from '@/services/auth/register'
 import { TermsAndConditions, TextDivider } from '@/components/atoms'
-import { RegisterFields } from './fields'
+import { SocialLogin } from '@/components/molecules'
 import { RegisterActions } from './actions'
+import { RegisterFields } from './fields'
 
 export function RegisterForm({
   className,
