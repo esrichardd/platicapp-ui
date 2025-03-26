@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 echo '🏗️👷 Styling and linting your affected projects before committing'
 
 # Run checks only on staged-files
