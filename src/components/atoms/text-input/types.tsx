@@ -4,4 +4,8 @@ export type TextInputProps = {
   type?: string;
   placeholder?: string;
   required?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
+  className?: string;
 };

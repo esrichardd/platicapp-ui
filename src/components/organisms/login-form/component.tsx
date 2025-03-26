@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { login } from "@/services/auth/login";
 import { cn } from "@/lib/helpers/shadcn-utils";
 import {
   Card,
@@ -7,13 +11,25 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { SocialLogin } from "@/components/molecules";
-import { TextInput } from "@/components/atoms";
-import { Button } from "@/components/ui/button";
+import { TermsAndConditions, TextDivider } from "@/components/atoms";
+import { LoginFields } from "./fields";
+import { LoginActions } from "./actions";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    await login({ email, password });
+    setIsLoading(false);
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -24,57 +40,22 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="grid gap-6">
               <SocialLogin />
-              <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                  O continua con
-                </span>
-              </div>
-              <div className="grid gap-6">
-                <TextInput
-                  id="email"
-                  label="Correo electrónico"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-                <div className="grid gap-2">
-                  <TextInput
-                    id="password"
-                    label="Contraseña"
-                    type="password"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="grid gap-6">
-                <Button type="submit" className="w-full">
-                  Iniciar sesión
-                </Button>
-                <div className="text-center text-sm">
-                  ¿No tienes una cuenta?{" "}
-                  <a href="#" className="underline underline-offset-4">
-                    Regístrate
-                  </a>
-                </div>
-              </div>
+              <TextDivider text="O continua con" />
+              <LoginFields
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+              />
+              <LoginActions isLoading={isLoading} />
             </div>
           </form>
         </CardContent>
       </Card>
-      <div className="text-center text-xs text-muted-foreground">
-        Al continuar, aceptas nuestros{" "}
-        <a href="#" className="underline underline-offset-4">
-          Términos de servicio
-        </a>{" "}
-        y nuestra{" "}
-        <a href="#" className="underline underline-offset-4">
-          Política de privacidad
-        </a>
-        .
-      </div>
+      <TermsAndConditions />
     </div>
   );
 }
