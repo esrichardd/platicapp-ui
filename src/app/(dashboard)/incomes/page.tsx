@@ -423,123 +423,122 @@ export default function IncomesPage() {
   return (
     <main className='flex-1 overflow-auto p-6'>
       <div className='grid gap-6'>
-        <div className='flex flex-col gap-4 md:flex-row md:items-center'>
-          <h2 className='text-2xl font-bold tracking-tight'>
-            Gestión de Ingresos
-          </h2>
-          <div className='ml-auto flex flex-col gap-2 sm:flex-row sm:items-center'>
-            <Dialog
-              open={isCreateDialogOpen}
-              onOpenChange={setIsCreateDialogOpen}
-            >
-              <DialogTrigger asChild>
-                <Button>
-                  <Plus className='mr-2 h-4 w-4' />
-                  Agregar Ingreso
-                </Button>
-              </DialogTrigger>
-              <DialogContent className='sm:max-w-[425px]'>
-                <DialogHeader>
-                  <DialogTitle>Agregar Nuevo Ingreso</DialogTitle>
-                  <DialogDescription>
-                    Ingresa los detalles de tu nuevo ingreso. Haz clic en
-                    guardar cuando hayas terminado.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className='grid gap-4 py-4'>
-                  <div className='grid grid-cols-4 items-center gap-4'>
-                    <Label htmlFor='description' className='text-right'>
-                      Descripción
-                    </Label>
-                    <Input
-                      id='description'
-                      placeholder='Salary, Freelance, etc.'
-                      className='col-span-3'
-                    />
-                  </div>
-                  <div className='grid grid-cols-4 items-center gap-4'>
-                    <Label htmlFor='amount' className='text-right'>
-                      Cantidad
-                    </Label>
-                    <Input
-                      id='amount'
-                      type='number'
-                      placeholder='0.00'
-                      className='col-span-3'
-                    />
-                  </div>
-                  <div className='grid grid-cols-4 items-center gap-4'>
-                    <Label htmlFor='category' className='text-right'>
-                      Categoría
-                    </Label>
-                    <Select>
-                      <SelectTrigger className='col-span-3'>
-                        <SelectValue placeholder='Select category' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categories
-                          .filter((cat) => cat !== 'Todas las categorías')
-                          .map((category) => (
-                            <SelectItem
-                              key={category}
-                              value={category.toLowerCase()}
-                            >
-                              {category}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className='grid grid-cols-4 items-center gap-4'>
-                    <Label htmlFor='account' className='text-right'>
-                      Cuenta
-                    </Label>
-                    <Select>
-                      <SelectTrigger className='col-span-3'>
-                        <SelectValue placeholder='Select account' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {accounts
-                          .filter((acc) => acc !== 'Todas las cuentas')
-                          .map((account) => (
-                            <SelectItem
-                              key={account}
-                              value={account.toLowerCase()}
-                            >
-                              {account}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className='grid grid-cols-4 items-center gap-4'>
-                    <Label htmlFor='date' className='text-right'>
-                      Fecha
-                    </Label>
-                    <Input id='date' type='date' className='col-span-3' />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button
-                    type='submit'
-                    onClick={() => setIsCreateDialogOpen(false)}
-                  >
-                    Guardar Ingreso
+        <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-4 md:flex-row md:items-center'>
+            <div className='ml-auto flex flex-col gap-2 sm:flex-row sm:items-center'>
+              <Dialog
+                open={isCreateDialogOpen}
+                onOpenChange={setIsCreateDialogOpen}
+              >
+                <DialogTrigger asChild>
+                  <Button className='w-full sm:w-auto'>
+                    <Plus className='mr-2 h-4 w-4' />
+                    Agregar Ingreso
                   </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-            <Button variant='outline'>
-              <Download className='mr-2 h-4 w-4' />
-              Exportar
-            </Button>
+                </DialogTrigger>
+                <DialogContent className='sm:max-w-[425px]'>
+                  <DialogHeader>
+                    <DialogTitle>Agregar Nuevo Ingreso</DialogTitle>
+                    <DialogDescription>
+                      Ingresa los detalles de tu nuevo ingreso. Haz clic en
+                      guardar cuando hayas terminado.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className='grid gap-4 py-4'>
+                    <div className='grid grid-cols-4 items-center gap-4'>
+                      <Label htmlFor='description' className='text-right'>
+                        Descripción
+                      </Label>
+                      <Input
+                        id='description'
+                        placeholder='Salary, Freelance, etc.'
+                        className='col-span-3'
+                      />
+                    </div>
+                    <div className='grid grid-cols-4 items-center gap-4'>
+                      <Label htmlFor='amount' className='text-right'>
+                        Cantidad
+                      </Label>
+                      <Input
+                        id='amount'
+                        type='number'
+                        placeholder='0.00'
+                        className='col-span-3'
+                      />
+                    </div>
+                    <div className='grid grid-cols-4 items-center gap-4'>
+                      <Label htmlFor='category' className='text-right'>
+                        Categoría
+                      </Label>
+                      <Select>
+                        <SelectTrigger className='col-span-3'>
+                          <SelectValue placeholder='Select category' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {categories
+                            .filter((cat) => cat !== 'Todas las categorías')
+                            .map((category) => (
+                              <SelectItem
+                                key={category}
+                                value={category.toLowerCase()}
+                              >
+                                {category}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className='grid grid-cols-4 items-center gap-4'>
+                      <Label htmlFor='account' className='text-right'>
+                        Cuenta
+                      </Label>
+                      <Select>
+                        <SelectTrigger className='col-span-3'>
+                          <SelectValue placeholder='Select account' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {accounts
+                            .filter((acc) => acc !== 'Todas las cuentas')
+                            .map((account) => (
+                              <SelectItem
+                                key={account}
+                                value={account.toLowerCase()}
+                              >
+                                {account}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className='grid grid-cols-4 items-center gap-4'>
+                      <Label htmlFor='date' className='text-right'>
+                        Fecha
+                      </Label>
+                      <Input id='date' type='date' className='col-span-3' />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button
+                      type='submit'
+                      onClick={() => setIsCreateDialogOpen(false)}
+                    >
+                      Guardar Ingreso
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              <Button variant='outline' className='w-full sm:w-auto' disabled>
+                <Download className='mr-2 h-4 w-4' />
+                Exportar
+              </Button>
+            </div>
           </div>
         </div>
 
         <Card>
-          <CardHeader className='pb-3'>
-            <div className='flex flex-col gap-4 md:flex-row md:items-center'>
-              <div className='relative w-full md:w-80'>
+          <CardHeader>
+            <div className='flex flex-col gap-4'>
+              <div className='relative w-full'>
                 <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
                 <Input
                   type='search'
@@ -549,7 +548,7 @@ export default function IncomesPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
-              <div className='flex flex-1 items-center gap-2 overflow-auto'>
+              <div className='flex flex-wrap items-center gap-2'>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -652,7 +651,7 @@ export default function IncomesPage() {
                       className={`h-8 gap-1 ${dateFrom || dateTo ? 'border-primary' : 'border-dashed'}`}
                     >
                       <CalendarIcon className='h-3.5 w-3.5' />
-                      <span>
+                      <span className='hidden sm:inline'>
                         {dateFrom && dateTo
                           ? `${formatDate(dateFrom)} - ${formatDate(dateTo)}`
                           : dateFrom
@@ -661,6 +660,7 @@ export default function IncomesPage() {
                               ? `Hasta ${formatDate(dateTo)}`
                               : 'Rango de fechas'}
                       </span>
+                      <span className='sm:hidden'>Fechas</span>
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className='w-auto p-0' align='start'>
@@ -757,7 +757,7 @@ export default function IncomesPage() {
                   value={selectedCategory}
                   onValueChange={setSelectedCategory}
                 >
-                  <SelectTrigger className='h-8 w-[180px]'>
+                  <SelectTrigger className='h-8 w-full sm:w-[180px]'>
                     <SelectValue placeholder='Categoría' />
                   </SelectTrigger>
                   <SelectContent>
@@ -773,7 +773,7 @@ export default function IncomesPage() {
                   value={selectedAccount}
                   onValueChange={setSelectedAccount}
                 >
-                  <SelectTrigger className='h-8 w-[180px]'>
+                  <SelectTrigger className='h-8 w-full sm:w-[180px]'>
                     <SelectValue placeholder='Cuenta' />
                   </SelectTrigger>
                   <SelectContent>
@@ -789,7 +789,7 @@ export default function IncomesPage() {
                   value={selectedStatus}
                   onValueChange={setSelectedStatus}
                 >
-                  <SelectTrigger className='h-8 w-[180px]'>
+                  <SelectTrigger className='h-8 w-full sm:w-[180px]'>
                     <SelectValue placeholder='Estado' />
                   </SelectTrigger>
                   <SelectContent>
@@ -804,7 +804,7 @@ export default function IncomesPage() {
             </div>
           </CardHeader>
           <div
-            className={`flex items-center gap-2 px-4 py-2 border-b transition-all ${selectedItems.length > 0 ? 'opacity-100' : 'opacity-0 h-0 py-0 overflow-hidden border-b-0'}`}
+            className={`flex items-center gap-2 px-4 py-2 border-b transition-all opacity-100`}
           >
             <span className='text-sm font-medium'>
               {selectedItems.length} elementos seleccionados
@@ -847,187 +847,211 @@ export default function IncomesPage() {
                 }}
               >
                 <Trash2 className='h-4 w-4 mr-1' />
-                Delete
+                Eliminar
               </Button>
             </div>
           </div>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className='w-[50px]'>
-                    <Checkbox
-                      checked={
-                        paginatedIncome.length > 0 &&
-                        selectedItems.length === paginatedIncome.length
-                      }
-                      onCheckedChange={toggleSelectAll}
-                    />
-                  </TableHead>
-                  <TableHead>Descripción</TableHead>
-                  <TableHead>Categoría</TableHead>
-                  <TableHead>Cuenta</TableHead>
-                  <TableHead>Fecha</TableHead>
-                  <TableHead>Estado</TableHead>
-                  <TableHead className='text-right'>Monto</TableHead>
-                  <TableHead className='w-[80px]'>Acciones</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {paginatedIncome.length === 0 ? (
+            <div className='relative w-full overflow-auto'>
+              <Table>
+                <TableHeader>
                   <TableRow>
-                    <TableCell colSpan={8} className='h-24 text-center'>
-                      No se encontraron entradas de ingresos.
-                    </TableCell>
+                    <TableHead className='w-[50px]'>
+                      <Checkbox
+                        checked={
+                          paginatedIncome.length > 0 &&
+                          selectedItems.length === paginatedIncome.length
+                        }
+                        onCheckedChange={toggleSelectAll}
+                      />
+                    </TableHead>
+                    <TableHead>Descripción</TableHead>
+                    <TableHead className='hidden sm:table-cell'>
+                      Categoría
+                    </TableHead>
+                    <TableHead className='hidden sm:table-cell'>
+                      Cuenta
+                    </TableHead>
+                    <TableHead className='hidden sm:table-cell'>
+                      Fecha
+                    </TableHead>
+                    <TableHead className='hidden sm:table-cell'>
+                      Estado
+                    </TableHead>
+                    <TableHead className='text-right'>Monto</TableHead>
+                    <TableHead className='w-[80px]'>Acciones</TableHead>
                   </TableRow>
-                ) : (
-                  paginatedIncome.map((income) => (
-                    <TableRow key={income.id}>
-                      <TableCell>
-                        <Checkbox
-                          checked={selectedItems.includes(income.id)}
-                          onCheckedChange={() => toggleSelectItem(income.id)}
-                        />
-                      </TableCell>
-                      <TableCell className='font-medium'>
-                        {income.description}
-                      </TableCell>
-                      <TableCell>{income.category}</TableCell>
-                      <TableCell>{income.account}</TableCell>
-                      <TableCell>
-                        {new Date(income.date).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={
-                            income.status === 'Completado'
-                              ? 'default'
-                              : 'secondary'
-                          }
-                        >
-                          {income.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className='text-right font-medium text-green-600'>
-                        ${income.amount.toFixed(2)}
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant='ghost' className='h-8 w-8 p-0'>
-                              <span className='sr-only'>Open menu</span>
-                              <MoreHorizontal className='h-4 w-4' />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align='end'>
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Duplicate</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className='text-red-600'>
-                              <Trash2 className='mr-2 h-4 w-4' />
-                              Delete
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                </TableHeader>
+                <TableBody>
+                  {paginatedIncome.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={8} className='h-24 text-center'>
+                        No se encontraron entradas de ingresos.
                       </TableCell>
                     </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-          </CardContent>
-          <CardFooter className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-            <div className='flex flex-col gap-2 sm:flex-row sm:items-center'>
-              <div className='flex items-center gap-2'>
-                <span className='text-sm text-muted-foreground'>Showing</span>
-                <strong>
-                  {paginatedIncome.length > 0
-                    ? (currentPage - 1) * entriesPerPage + 1
-                    : 0}
-                </strong>
-                <span className='text-sm text-muted-foreground'>to</span>
-                <strong>
-                  {Math.min(
-                    currentPage * entriesPerPage,
-                    filteredIncome.length,
+                  ) : (
+                    paginatedIncome.map((income) => (
+                      <TableRow key={income.id}>
+                        <TableCell>
+                          <Checkbox
+                            checked={selectedItems.includes(income.id)}
+                            onCheckedChange={() => toggleSelectItem(income.id)}
+                          />
+                        </TableCell>
+                        <TableCell className='font-medium'>
+                          <div className='flex flex-col'>
+                            <span>{income.description}</span>
+                            <span className='text-sm text-muted-foreground sm:hidden'>
+                              {income.category} • {income.account} •{' '}
+                              {new Date(income.date).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell className='hidden sm:table-cell'>
+                          {income.category}
+                        </TableCell>
+                        <TableCell className='hidden sm:table-cell'>
+                          {income.account}
+                        </TableCell>
+                        <TableCell className='hidden sm:table-cell'>
+                          {new Date(income.date).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell className='hidden sm:table-cell'>
+                          <Badge
+                            variant={
+                              income.status === 'Completado'
+                                ? 'default'
+                                : 'secondary'
+                            }
+                          >
+                            {income.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className='text-right font-medium text-green-600'>
+                          ${income.amount.toFixed(2)}
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant='ghost' className='h-8 w-8 p-0'>
+                                <span className='sr-only'>Open menu</span>
+                                <MoreHorizontal className='h-4 w-4' />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align='end'>
+                              <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                              <DropdownMenuItem>Editar</DropdownMenuItem>
+                              <DropdownMenuItem>Duplicar</DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className='text-red-600'>
+                                <Trash2 className='mr-2 h-4 w-4' />
+                                Eliminar
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))
                   )}
-                </strong>
-                <span className='text-sm text-muted-foreground'>of</span>
-                <strong>{filteredIncome.length}</strong>
-                <span className='text-sm text-muted-foreground'>entries</span>
-              </div>
-              <div className='flex items-center gap-2'>
-                <span className='text-sm text-muted-foreground'>Show</span>
-                <Select
-                  value={entriesPerPage.toString()}
-                  onValueChange={(value) => {
-                    setEntriesPerPage(Number.parseInt(value))
-                    setCurrentPage(1)
-                  }}
-                >
-                  <SelectTrigger className='h-8 w-[80px]'>
-                    <SelectValue placeholder='10' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {entriesPerPageOptions.map((option) => (
-                      <SelectItem key={option} value={option.toString()}>
-                        {option}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <span className='text-sm text-muted-foreground'>per page</span>
-              </div>
+                </TableBody>
+              </Table>
             </div>
-
-            <div className='flex items-center gap-2'>
-              <Button
-                variant='outline'
-                size='sm'
-                onClick={() => changePage(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                <ChevronLeft className='h-4 w-4 mr-1' />
-                Previous
-              </Button>
-              <div className='flex items-center gap-1'>
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  let pageToShow
-                  if (totalPages <= 5) {
-                    pageToShow = i + 1
-                  } else if (currentPage <= 3) {
-                    pageToShow = i + 1
-                  } else if (currentPage >= totalPages - 2) {
-                    pageToShow = totalPages - 4 + i
-                  } else {
-                    pageToShow = currentPage - 2 + i
-                  }
-
-                  return (
-                    <Button
-                      key={pageToShow}
-                      variant={
-                        currentPage === pageToShow ? 'default' : 'outline'
-                      }
-                      size='icon'
-                      className='h-8 w-8'
-                      onClick={() => changePage(pageToShow)}
-                    >
-                      {pageToShow}
-                    </Button>
-                  )
-                })}
+          </CardContent>
+          <CardFooter className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+              <div className='flex flex-col gap-2 sm:flex-row sm:items-center'>
+                <div className='flex items-center gap-2'>
+                  <span className='text-sm text-muted-foreground'>Showing</span>
+                  <strong>
+                    {paginatedIncome.length > 0
+                      ? (currentPage - 1) * entriesPerPage + 1
+                      : 0}
+                  </strong>
+                  <span className='text-sm text-muted-foreground'>to</span>
+                  <strong>
+                    {Math.min(
+                      currentPage * entriesPerPage,
+                      filteredIncome.length,
+                    )}
+                  </strong>
+                  <span className='text-sm text-muted-foreground'>of</span>
+                  <strong>{filteredIncome.length}</strong>
+                  <span className='text-sm text-muted-foreground'>entries</span>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <span className='text-sm text-muted-foreground'>Show</span>
+                  <Select
+                    value={entriesPerPage.toString()}
+                    onValueChange={(value) => {
+                      setEntriesPerPage(Number.parseInt(value))
+                      setCurrentPage(1)
+                    }}
+                  >
+                    <SelectTrigger className='h-8 w-[80px]'>
+                      <SelectValue placeholder='10' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {entriesPerPageOptions.map((option) => (
+                        <SelectItem key={option} value={option.toString()}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <span className='text-sm text-muted-foreground'>
+                    per page
+                  </span>
+                </div>
               </div>
-              <Button
-                variant='outline'
-                size='sm'
-                onClick={() => changePage(currentPage + 1)}
-                disabled={currentPage === totalPages || totalPages === 0}
-              >
-                Next
-                <ChevronRight className='h-4 w-4 ml-1' />
-              </Button>
+
+              <div className='flex items-center justify-center gap-2'>
+                <Button
+                  variant='outline'
+                  size='sm'
+                  onClick={() => changePage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  <ChevronLeft className='h-4 w-4 mr-1' />
+                  <span className='hidden sm:inline'>Previous</span>
+                </Button>
+                <div className='flex items-center gap-1'>
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                    let pageToShow
+                    if (totalPages <= 5) {
+                      pageToShow = i + 1
+                    } else if (currentPage <= 3) {
+                      pageToShow = i + 1
+                    } else if (currentPage >= totalPages - 2) {
+                      pageToShow = totalPages - 4 + i
+                    } else {
+                      pageToShow = currentPage - 2 + i
+                    }
+
+                    return (
+                      <Button
+                        key={pageToShow}
+                        variant={
+                          currentPage === pageToShow ? 'default' : 'outline'
+                        }
+                        size='icon'
+                        className='h-8 w-8'
+                        onClick={() => changePage(pageToShow)}
+                      >
+                        {pageToShow}
+                      </Button>
+                    )
+                  })}
+                </div>
+                <Button
+                  variant='outline'
+                  size='sm'
+                  onClick={() => changePage(currentPage + 1)}
+                  disabled={currentPage === totalPages || totalPages === 0}
+                >
+                  <span className='hidden sm:inline'>Next</span>
+                  <ChevronRight className='h-4 w-4 ml-1' />
+                </Button>
+              </div>
             </div>
           </CardFooter>
         </Card>
