@@ -2,8 +2,6 @@
 
 import * as React from 'react'
 import {
-  AudioWaveform,
-  Command,
   DollarSign,
   GalleryVerticalEnd,
   HelpCircle,
@@ -26,100 +24,81 @@ import {
 import { NavMain } from './nav-main'
 import { NavUser } from './nav-user'
 
-// This is sample data.
-const data = {
-  user: {
-    name: 'Richard',
-    email: 'richard@gmail.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  teams: [
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-    {
-      name: 'Evil Corp.',
-      logo: Command,
-      plan: 'Free',
-    },
-  ],
-  navMain: [
-    {
-      title: 'Dashboard',
-      url: '#',
-      items: [
-        {
-          title: 'Inicio',
-          url: '/dashboard',
-          isActive: true,
-          icon: Home,
-        },
-        {
-          title: 'Ingresos',
-          url: '/incomes',
-          isActive: false,
-          icon: DollarSign,
-        },
-        {
-          title: 'Gastos',
-          url: '/expenses',
-          isActive: false,
-          icon: Receipt,
-        },
-        {
-          title: 'Cuentas de Banco',
-          url: '/accounts',
-          isActive: false,
-          icon: Wallet,
-        },
-        {
-          title: 'Categorías',
-          url: '/categories',
-          isActive: false,
-          icon: Tags,
-        },
-      ],
-    },
-    {
-      title: 'Personal',
-      url: '#',
-      items: [
-        {
-          title: 'Perfil',
-          url: '#',
-          isActive: false,
-          icon: User,
-        },
-        {
-          title: 'Configuración',
-          url: '#',
-          isActive: false,
-          icon: Settings,
-        },
-        {
-          title: 'Ayuda',
-          url: '#',
-          isActive: false,
-          icon: HelpCircle,
-        },
-        {
-          title: 'Cerrar Sesión',
-          url: '#',
-          isActive: false,
-          icon: LogOut,
-          className: 'text-destructive hover:text-destructive',
-        },
-      ],
-    },
-  ],
+const user = {
+  name: 'Richard',
+  email: 'richard@gmail.com',
+  avatar: '/avatars/shadcn.jpg',
 }
+
+const navMain = [
+  {
+    title: 'Dashboard',
+    url: '#',
+    items: [
+      {
+        title: 'Inicio',
+        url: '/dashboard',
+        isActive: true,
+        icon: Home,
+      },
+      {
+        title: 'Ingresos',
+        url: '/incomes',
+        isActive: false,
+        icon: DollarSign,
+      },
+      {
+        title: 'Gastos',
+        url: '/expenses',
+        isActive: false,
+        icon: Receipt,
+      },
+      {
+        title: 'Cuentas de Banco',
+        url: '/accounts',
+        isActive: false,
+        icon: Wallet,
+      },
+      {
+        title: 'Categorías',
+        url: '/categories',
+        isActive: false,
+        icon: Tags,
+      },
+    ],
+  },
+  {
+    title: 'Personal',
+    url: '#',
+    items: [
+      {
+        title: 'Perfil',
+        url: '#',
+        isActive: false,
+        icon: User,
+      },
+      {
+        title: 'Configuración',
+        url: '#',
+        isActive: false,
+        icon: Settings,
+      },
+      {
+        title: 'Ayuda',
+        url: '#',
+        isActive: false,
+        icon: HelpCircle,
+      },
+      {
+        title: 'Cerrar Sesión',
+        url: '#',
+        isActive: false,
+        icon: LogOut,
+        className: 'text-destructive hover:text-destructive',
+      },
+    ],
+  },
+]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const handleLogout = async () => {
@@ -129,10 +108,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible='icon' {...props}>
       <SidebarHeader>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain data={data} onLogout={handleLogout} />
+        <NavMain navMain={navMain} onLogout={handleLogout} />
       </SidebarContent>
       <SidebarFooter>
         <div className='flex items-center justify-center gap-2 px-2'>

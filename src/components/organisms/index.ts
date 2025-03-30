@@ -1,3 +1,7 @@
 export * from './login-form/component'
 export * from './register-form/component'
 export * from './sidebar/component'
+export * from './transaction-filter-bar/component'
+export * from './create-transaction-dialog/component'
+export * from './pagination-controls/component'
+export * from './transaction-table/component'

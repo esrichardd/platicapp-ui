@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { type LucideIcon } from 'lucide-react'
 import {
   SidebarGroup,
@@ -25,16 +27,20 @@ interface NavGroup {
 }
 
 interface NavMainProps {
-  data: {
-    navMain: NavGroup[]
-  }
+  navMain: NavGroup[]
   onLogout?: () => Promise<void>
 }
 
-export function NavMain({ data, onLogout }: NavMainProps) {
+export function NavMain({ navMain, onLogout }: NavMainProps) {
+  const pathname = usePathname()
+
+  const isActive = (url: string) => {
+    return pathname === url
+  }
+
   return (
     <>
-      {data.navMain.map((group) => (
+      {navMain.map((group) => (
         <SidebarGroup key={group.title}>
           <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -43,16 +49,16 @@ export function NavMain({ data, onLogout }: NavMainProps) {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    isActive={item.isActive}
+                    isActive={isActive(item.url)}
                     className={item.className}
                     onClick={
                       item.title === 'Cerrar Sesión' ? onLogout : undefined
                     }
                   >
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       {item.icon && <item.icon className='size-4' />}
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
