@@ -1,6 +1,10 @@
 'use client'
 
+import { useState } from 'react'
+import { Plus } from 'lucide-react'
 import { useTransactionFilters } from '@/lib/hooks/use-transaction-filters'
+import { Transaction } from '@/lib/sdk-types'
+import { Button } from '@/components/ui/button'
 import {
   CreateTransactionDialog,
   PaginationControls,
@@ -8,19 +12,10 @@ import {
   TransactionTable,
 } from '@/components/organisms'
 
-export type Transaction = {
-  id: number
-  description: string
-  category: string
-  amount: number
-  date: string
-  account: string
-  status: string
-}
-
 const incomeData: Transaction[] = [
   {
     id: 1,
+    type: 'income',
     description: 'Salario',
     category: 'Empleo',
     amount: 3500.0,
@@ -30,6 +25,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 2,
+    type: 'income',
     description: 'Trabajo freelance',
     category: 'Autónomo',
     amount: 850.0,
@@ -39,6 +35,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 3,
+    type: 'income',
     description: 'Pago de dividendos',
     category: 'Inversión',
     amount: 125.5,
@@ -48,6 +45,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 4,
+    type: 'income',
     description: 'Rental Income',
     category: 'Inmobiliario',
     amount: 1200.0,
@@ -57,6 +55,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 5,
+    type: 'income',
     description: 'Side Project',
     category: 'Autónomo',
     amount: 450.0,
@@ -66,6 +65,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 6,
+    type: 'income',
     description: 'Tax Refund',
     category: 'Gobierno',
     amount: 750.0,
@@ -75,6 +75,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 7,
+    type: 'income',
     description: 'Interest',
     category: 'Inversión',
     amount: 35.25,
@@ -84,6 +85,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 8,
+    type: 'income',
     description: 'Gift',
     category: 'Personal',
     amount: 200.0,
@@ -93,6 +95,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 9,
+    type: 'income',
     description: 'Bonus',
     category: 'Empleo',
     amount: 1000.0,
@@ -102,6 +105,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 10,
+    type: 'income',
     description: 'Stock Dividend',
     category: 'Inversión',
     amount: 320.75,
@@ -111,6 +115,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 11,
+    type: 'income',
     description: 'Consulting Fee',
     category: 'Autónomo',
     amount: 1500.0,
@@ -120,6 +125,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 12,
+    type: 'income',
     description: 'Rental Property 2',
     category: 'Inmobiliario',
     amount: 950.0,
@@ -129,6 +135,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 13,
+    type: 'income',
     description: 'Tax Return',
     category: 'Gobierno',
     amount: 1250.0,
@@ -138,6 +145,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 14,
+    type: 'income',
     description: 'Online Course Sales',
     category: 'Autónomo',
     amount: 750.0,
@@ -147,6 +155,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 15,
+    type: 'income',
     description: 'Savings Interest',
     category: 'Inversión',
     amount: 45.5,
@@ -156,6 +165,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 16,
+    type: 'income',
     description: 'Royalty Payment',
     category: 'Autónomo',
     amount: 325.0,
@@ -165,6 +175,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 17,
+    type: 'income',
     description: 'Part-time Job',
     category: 'Empleo',
     amount: 600.0,
@@ -174,6 +185,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 18,
+    type: 'income',
     description: 'Affiliate Commission',
     category: 'Autónomo',
     amount: 250.0,
@@ -183,6 +195,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 19,
+    type: 'income',
     description: 'Rental Deposit Return',
     category: 'Inmobiliario',
     amount: 1000.0,
@@ -192,6 +205,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 20,
+    type: 'income',
     description: 'Cryptocurrency Gain',
     category: 'Inversión',
     amount: 1750.0,
@@ -201,6 +215,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 21,
+    type: 'income',
     description: 'Garage Sale',
     category: 'Personal',
     amount: 350.0,
@@ -210,6 +225,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 22,
+    type: 'income',
     description: 'Tutoring',
     category: 'Autónomo',
     amount: 400.0,
@@ -219,6 +235,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 23,
+    type: 'income',
     description: 'Quarterly Bonus',
     category: 'Empleo',
     amount: 2000.0,
@@ -228,6 +245,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 24,
+    type: 'income',
     description: 'Dividend Payout',
     category: 'Inversión',
     amount: 175.25,
@@ -237,6 +255,7 @@ const incomeData: Transaction[] = [
   },
   {
     id: 25,
+    type: 'income',
     description: 'Rental Income Property 3',
     category: 'Inmobiliario',
     amount: 1100.0,
@@ -260,6 +279,8 @@ export function IncomesTemplate() {
     clearSelection,
   } = useTransactionFilters(incomeData)
 
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
+
   const handleBulkAction = (
     action: 'delete' | 'duplicate' | 'transfer',
     ids: number[],
@@ -277,13 +298,30 @@ export function IncomesTemplate() {
     <main className='flex-1 p-4 sm:p-6 overflow-hidden'>
       <div className='flex flex-col gap-6 h-full'>
         <div className='flex justify-between items-center'>
-          <CreateTransactionDialog type='income' onCreate={handleCreate} />
+          <Button
+            className='w-full sm:w-auto'
+            onClick={() => setIsCreateOpen(true)}
+          >
+            <Plus className='mr-2 h-4 w-4' />
+            Agregar Ingreso
+          </Button>
+
+          <CreateTransactionDialog
+            type='income'
+            mode='create'
+            open={isCreateOpen}
+            onOpenChange={setIsCreateOpen}
+            onSubmit={(data) => {
+              handleCreate(data)
+              setIsCreateOpen(false)
+            }}
+          />
         </div>
 
         <TransactionFilterBar filters={filters} onFilterChange={setFilters} />
 
         <TransactionTable
-          data={paginatedData}
+          transactions={paginatedData}
           selectedItems={selectedItems}
           onToggleSelect={toggleSelectItem}
           onToggleSelectAll={toggleSelectAll}

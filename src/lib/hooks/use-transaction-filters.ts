@@ -1,42 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
-
-// types.ts
-export type Transaction = {
-  id: number
-  description: string
-  category: string
-  amount: number
-  date: string
-  account: string
-  status: string
-}
-
-export type FilterState = {
-  searchTerm: string
-  selectedCategory: string
-  selectedAccount: string
-  selectedStatus: string
-  dateFrom?: Date
-  dateTo?: Date
-}
-
-export type PaginationState = {
-  currentPage: number
-  entriesPerPage: number
-}
-
-export type UseTransactionFiltersResult = {
-  filteredData: Transaction[]
-  paginatedData: Transaction[]
-  filters: FilterState
-  setFilters: (filters: Partial<FilterState>) => void
-  pagination: PaginationState & { totalPages: number }
-  setPagination: (pagination: Partial<PaginationState>) => void
-  selectedItems: number[]
-  toggleSelectItem: (id: number) => void
-  toggleSelectAll: () => void
-  clearSelection: () => void
-}
+import {
+  FilterState,
+  PaginationState,
+  Transaction,
+  UseTransactionFiltersResult,
+} from '@/lib/sdk-types'
 
 export function useTransactionFilters(
   data: Transaction[],

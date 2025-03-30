@@ -1,9 +1,10 @@
 'use client'
 
-import {
-  Transaction,
-  useTransactionFilters,
-} from '@/lib/hooks/use-transaction-filters'
+import { useState } from 'react'
+import { Plus } from 'lucide-react'
+import { useTransactionFilters } from '@/lib/hooks/use-transaction-filters'
+import { Transaction } from '@/lib/sdk-types'
+import { Button } from '@/components/ui/button'
 import {
   CreateTransactionDialog,
   PaginationControls,
@@ -14,6 +15,7 @@ import {
 const expenseData: Transaction[] = [
   {
     id: 1,
+    type: 'expense',
     description: 'Alquiler mensual',
     category: 'Vivienda',
     amount: 800.0,
@@ -23,6 +25,7 @@ const expenseData: Transaction[] = [
   },
   {
     id: 2,
+    type: 'expense',
     description: 'Compra de supermercado',
     category: 'Alimentación',
     amount: 150.0,
@@ -32,6 +35,7 @@ const expenseData: Transaction[] = [
   },
   {
     id: 3,
+    type: 'expense',
     description: 'Gasolina',
     category: 'Transporte',
     amount: 60.0,
@@ -41,6 +45,7 @@ const expenseData: Transaction[] = [
   },
   {
     id: 4,
+    type: 'expense',
     description: 'Internet y teléfono',
     category: 'Servicios',
     amount: 55.0,
@@ -65,6 +70,8 @@ export function ExpensesTemplate() {
     clearSelection,
   } = useTransactionFilters(expenseData)
 
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
+
   const handleBulkAction = (
     action: 'delete' | 'duplicate' | 'transfer',
     ids: number[],
@@ -82,13 +89,26 @@ export function ExpensesTemplate() {
     <main className='flex-1 p-4 sm:p-6 overflow-hidden'>
       <div className='flex flex-col gap-6 h-full'>
         <div className='flex justify-between items-center'>
-          <CreateTransactionDialog type='expense' onCreate={handleCreate} />
+          <Button
+            className='w-full sm:w-auto'
+            onClick={() => setIsCreateOpen(true)}
+          >
+            <Plus className='mr-2 h-4 w-4' />
+            Agregar Gasto
+          </Button>
+          <CreateTransactionDialog
+            type='expense'
+            mode='create'
+            open={isCreateOpen}
+            onOpenChange={setIsCreateOpen}
+            onSubmit={handleCreate}
+          />
         </div>
 
         <TransactionFilterBar filters={filters} onFilterChange={setFilters} />
 
         <TransactionTable
-          data={paginatedData}
+          transactions={paginatedData}
           selectedItems={selectedItems}
           onToggleSelect={toggleSelectItem}
           onToggleSelectAll={toggleSelectAll}

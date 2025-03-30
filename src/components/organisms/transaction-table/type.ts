@@ -1,15 +1,7 @@
-export type Transaction = {
-  id: number
-  description: string
-  category: string
-  amount: number
-  date: string
-  account: string
-  status: string
-}
+import { Transaction, TransactionInput } from '@/lib/sdk-types'
 
 export type TransactionTableProps = {
-  data: Transaction[]
+  transactions: Transaction[]
   selectedItems: number[]
   onToggleSelect: (id: number) => void
   onToggleSelectAll: () => void
@@ -17,4 +9,5 @@ export type TransactionTableProps = {
     action: 'delete' | 'duplicate' | 'transfer',
     ids: number[],
   ) => void
+  onEdit?: (id: number, data: TransactionInput) => void
 }

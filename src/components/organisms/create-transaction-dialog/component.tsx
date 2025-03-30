@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { TransactionInput } from '@/lib/sdk-types'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -10,7 +10,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -22,21 +21,39 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { ACCOUNTS, CATEGORIES } from './constants'
-import { CreateTransactionDialogProps, TransactionInput } from './type'
+import { CreateTransactionDialogProps } from './type'
 
 export function CreateTransactionDialog({
   type,
-  onCreate,
+  mode,
+  onSubmit,
+  initialData,
+  open,
+  onOpenChange,
 }: CreateTransactionDialogProps) {
-  const [open, setOpen] = useState(false)
-
   const [form, setForm] = useState<TransactionInput>({
     description: '',
     amount: 0,
     category: '',
     account: '',
     date: '',
+    type: type,
   })
+
+  useEffect(() => {
+    if (open && mode === 'edit' && initialData) {
+      setForm(initialData)
+    } else if (!open && mode === 'create') {
+      setForm({
+        description: '',
+        amount: 0,
+        category: '',
+        account: '',
+        date: '',
+        type: type,
+      })
+    }
+  }, [open, mode, initialData])
 
   const handleChange = (
     field: keyof TransactionInput,
@@ -57,28 +74,42 @@ export function CreateTransactionDialog({
       return
     }
 
-    onCreate(form)
-    setOpen(false)
-    setForm({ description: '', amount: 0, category: '', account: '', date: '' })
+    onSubmit(form)
+    onOpenChange?.(false)
   }
 
   const capitalizedType = type === 'income' ? 'Ingreso' : 'Gasto'
+  const actionLabel = mode === 'create' ? 'Agregar' : 'Editar'
   const categories = CATEGORIES[type]
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className='w-full sm:w-auto'>
-          <Plus className='mr-2 h-4 w-4' />
-          Agregar {capitalizedType}
-        </Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {/* <DialogTrigger asChild>
+        {trigger ?? (
+          <Button className='w-full sm:w-auto'>
+            {mode === 'create' ? (
+              <>
+                <Plus className='mr-2 h-4 w-4' />
+                Agregar {capitalizedType}
+              </>
+            ) : (
+              <>
+                <Pencil className='mr-2 h-4 w-4' />
+                Editar {capitalizedType}
+              </>
+            )}
+          </Button>
+        )}
+      </DialogTrigger> */}
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Agregar Nuevo {capitalizedType}</DialogTitle>
+          <DialogTitle>
+            {actionLabel} {capitalizedType}
+          </DialogTitle>
           <DialogDescription>
-            Ingresa los detalles de tu {type === 'income' ? 'ingreso' : 'gasto'}{' '}
-            y guarda los cambios.
+            {mode === 'create'
+              ? `Completa los datos para agregar un nuevo ${type === 'income' ? 'ingreso' : 'gasto'}.`
+              : `Modifica los campos para actualizar el ${type === 'income' ? 'ingreso' : 'gasto'}.`}
           </DialogDescription>
         </DialogHeader>
 
@@ -89,10 +120,10 @@ export function CreateTransactionDialog({
             </Label>
             <Input
               id='description'
-              placeholder='Ej: Salario, Alquiler, etc.'
-              className='col-span-3'
               value={form.description}
               onChange={(e) => handleChange('description', e.target.value)}
+              className='col-span-3'
+              placeholder='Ej: Salario, Alquiler...'
             />
           </div>
           <div className='grid grid-cols-4 items-center gap-4'>
@@ -102,11 +133,11 @@ export function CreateTransactionDialog({
             <Input
               id='amount'
               type='number'
-              className='col-span-3'
               value={form.amount}
               onChange={(e) =>
                 handleChange('amount', parseFloat(e.target.value))
               }
+              className='col-span-3'
             />
           </div>
           <div className='grid grid-cols-4 items-center gap-4'>
@@ -152,15 +183,17 @@ export function CreateTransactionDialog({
             <Input
               id='date'
               type='date'
-              className='col-span-3'
               value={form.date}
               onChange={(e) => handleChange('date', e.target.value)}
+              className='col-span-3'
             />
           </div>
         </div>
 
         <DialogFooter>
-          <Button onClick={handleSubmit}>Guardar {capitalizedType}</Button>
+          <Button onClick={handleSubmit}>
+            {mode === 'create' ? 'Guardar' : 'Actualizar'}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

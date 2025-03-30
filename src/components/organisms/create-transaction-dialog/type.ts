@@ -1,12 +1,11 @@
-export type TransactionInput = {
-  description: string
-  amount: number
-  category: string
-  account: string
-  date: string
-}
+import { TransactionInput } from '@/lib/sdk-types'
 
 export type CreateTransactionDialogProps = {
   type: 'income' | 'expense'
-  onCreate: (data: TransactionInput) => void
+  mode: 'create' | 'edit'
+  onSubmit: (data: TransactionInput) => void
+  initialData?: TransactionInput
+  trigger?: React.ReactNode
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }

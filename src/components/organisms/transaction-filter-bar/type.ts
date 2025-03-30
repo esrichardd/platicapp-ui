@@ -1,10 +1,4 @@
-type FilterState = {
-  selectedCategory: string
-  selectedAccount: string
-  selectedStatus: string
-  dateFrom?: Date
-  dateTo?: Date
-}
+import { FilterState } from '@/lib/sdk-types'
 
 export type TransactionFilterBarProps = {
   filters: FilterState

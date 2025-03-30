@@ -1,3 +1,4 @@
+import { Transaction } from '@/lib/sdk-types'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -9,20 +10,11 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-interface Transaction {
-  id: number
-  description: string
-  category: string
-  amount: number
-  date: string
-  account: string
-}
-
-interface Props {
+type RecentTransactionsProps = {
   transactions: Transaction[]
 }
 
-export function RecentTransactions({ transactions }: Props) {
+export function RecentTransactions({ transactions }: RecentTransactionsProps) {
   return (
     <Card>
       <CardHeader>

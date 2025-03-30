@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { ArrowRightLeft, Copy, MoreHorizontal, Trash2 } from 'lucide-react'
+import { TransactionInput } from '@/lib/sdk-types'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -20,52 +22,65 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { CreateTransactionDialog } from '../create-transaction-dialog/component'
 import { TransactionTableProps } from './type'
 
 export function TransactionTable({
-  data,
+  transactions,
   selectedItems,
   onToggleSelect,
   onToggleSelectAll,
   onBulkAction,
+  onEdit,
 }: TransactionTableProps) {
-  const allSelected = data.length > 0 && selectedItems.length === data.length
+  const allSelected =
+    transactions.length > 0 && selectedItems.length === transactions.length
+  const [editingTransaction, setEditingTransaction] = useState<{
+    id: number
+    data: TransactionInput
+  } | null>(null)
+
+  const handleEdit = (data: TransactionInput) => {
+    onEdit?.(12, data)
+    setEditingTransaction(null)
+  }
 
   return (
     <div className='border rounded-md overflow-auto'>
-      {selectedItems.length > 0 && (
-        <div className='flex items-center justify-between px-4 py-2 border-b bg-muted'>
-          <span className='text-sm font-medium'>
-            {selectedItems.length} elementos seleccionados
-          </span>
-          <div className='flex gap-2'>
-            <Button
-              size='sm'
-              variant='outline'
-              onClick={() => onBulkAction?.('duplicate', selectedItems)}
-            >
-              <Copy className='w-4 h-4 mr-1' />
-              Duplicar
-            </Button>
-            <Button
-              size='sm'
-              variant='outline'
-              onClick={() => onBulkAction?.('transfer', selectedItems)}
-            >
-              <ArrowRightLeft className='w-4 h-4 mr-1' />
-              Transferir
-            </Button>
-            <Button
-              size='sm'
-              variant='destructive'
-              onClick={() => onBulkAction?.('delete', selectedItems)}
-            >
-              <Trash2 className='w-4 h-4 mr-1' />
-              Eliminar
-            </Button>
-          </div>
+      <div className='flex items-center justify-between px-4 py-2 border-b bg-muted'>
+        <span className='text-sm font-medium'>
+          {selectedItems.length} elementos seleccionados
+        </span>
+        <div className='flex gap-2'>
+          <Button
+            size='sm'
+            variant='outline'
+            onClick={() => onBulkAction?.('duplicate', selectedItems)}
+            disabled={selectedItems.length === 0}
+          >
+            <Copy className='w-4 h-4 mr-1' />
+            Duplicar
+          </Button>
+          <Button
+            size='sm'
+            variant='outline'
+            onClick={() => onBulkAction?.('transfer', selectedItems)}
+            disabled={selectedItems.length === 0}
+          >
+            <ArrowRightLeft className='w-4 h-4 mr-1' />
+            Transferir
+          </Button>
+          <Button
+            size='sm'
+            variant='destructive'
+            onClick={() => onBulkAction?.('delete', selectedItems)}
+            disabled={selectedItems.length === 0}
+          >
+            <Trash2 className='w-4 h-4 mr-1' />
+            Eliminar
+          </Button>
         </div>
-      )}
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -87,14 +102,14 @@ export function TransactionTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.length === 0 ? (
+          {transactions.length === 0 ? (
             <TableRow>
               <TableCell colSpan={8} className='h-24 text-center'>
                 No se encontraron transacciones.
               </TableCell>
             </TableRow>
           ) : (
-            data.map((item) => (
+            transactions.map((item) => (
               <TableRow key={item.id}>
                 <TableCell className='sticky left-0 bg-background'>
                   <Checkbox
@@ -136,13 +151,29 @@ export function TransactionTable({
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant='ghost' className='h-8 w-8 p-0'>
-                        <span className='sr-only'>Open menu</span>
+                        <span className='sr-only'>Abrir menú</span>
                         <MoreHorizontal className='h-4 w-4' />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                       <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-                      <DropdownMenuItem>Editar</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setEditingTransaction({
+                            id: item.id,
+                            data: {
+                              type: 'income',
+                              description: item.description,
+                              amount: item.amount,
+                              account: item.account,
+                              category: item.category,
+                              date: item.date,
+                            },
+                          })
+                        }}
+                      >
+                        Editar
+                      </DropdownMenuItem>
                       <DropdownMenuItem>Duplicar</DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className='text-red-600'>
@@ -157,6 +188,22 @@ export function TransactionTable({
           )}
         </TableBody>
       </Table>
+
+      {editingTransaction && (
+        <CreateTransactionDialog
+          type={editingTransaction.data.type}
+          mode='edit'
+          initialData={editingTransaction.data}
+          open={true}
+          onOpenChange={(open) => {
+            if (!open) setEditingTransaction(null)
+          }}
+          onSubmit={(data) => {
+            handleEdit(data)
+            setEditingTransaction(null)
+          }}
+        />
+      )}
     </div>
   )
 }
