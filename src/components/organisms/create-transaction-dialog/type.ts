@@ -7,5 +7,6 @@ export type TransactionInput = {
 }
 
 export type CreateTransactionDialogProps = {
+  type: 'income' | 'expense'
   onCreate: (data: TransactionInput) => void
 }

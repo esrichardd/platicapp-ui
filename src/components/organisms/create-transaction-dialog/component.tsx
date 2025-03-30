@@ -25,6 +25,7 @@ import { ACCOUNTS, CATEGORIES } from './constants'
 import { CreateTransactionDialogProps, TransactionInput } from './type'
 
 export function CreateTransactionDialog({
+  type,
   onCreate,
 }: CreateTransactionDialogProps) {
   const [open, setOpen] = useState(false)
@@ -58,29 +59,26 @@ export function CreateTransactionDialog({
 
     onCreate(form)
     setOpen(false)
-    setForm({
-      description: '',
-      amount: 0,
-      category: '',
-      account: '',
-      date: '',
-    })
+    setForm({ description: '', amount: 0, category: '', account: '', date: '' })
   }
+
+  const capitalizedType = type === 'income' ? 'Ingreso' : 'Gasto'
+  const categories = CATEGORIES[type]
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className='w-full sm:w-auto'>
           <Plus className='mr-2 h-4 w-4' />
-          Agregar Ingreso
+          Agregar {capitalizedType}
         </Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Agregar Nuevo</DialogTitle>
+          <DialogTitle>Agregar Nuevo {capitalizedType}</DialogTitle>
           <DialogDescription>
-            Completa los datos y presiona guardar para añadir una nueva
-            transacción.
+            Ingresa los detalles de tu {type === 'income' ? 'ingreso' : 'gasto'}{' '}
+            y guarda los cambios.
           </DialogDescription>
         </DialogHeader>
 
@@ -91,7 +89,7 @@ export function CreateTransactionDialog({
             </Label>
             <Input
               id='description'
-              placeholder='Salario, Venta, etc.'
+              placeholder='Ej: Salario, Alquiler, etc.'
               className='col-span-3'
               value={form.description}
               onChange={(e) => handleChange('description', e.target.value)}
@@ -121,7 +119,7 @@ export function CreateTransactionDialog({
                 <SelectValue placeholder='Selecciona' />
               </SelectTrigger>
               <SelectContent>
-                {CATEGORIES.map((cat) => (
+                {categories.map((cat) => (
                   <SelectItem key={cat} value={cat}>
                     {cat}
                   </SelectItem>
@@ -162,7 +160,7 @@ export function CreateTransactionDialog({
         </div>
 
         <DialogFooter>
-          <Button onClick={handleSubmit}>Guardar</Button>
+          <Button onClick={handleSubmit}>Guardar {capitalizedType}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
