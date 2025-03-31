@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Transaction } from '@/lib/sdk-types'
 import { AccountSelector } from '@/components/molecules'
 import { FinancialSummary } from './dashboard-financial-summary'
 import { QuickActions } from './quick-actions'
@@ -69,7 +70,9 @@ export function DashboardTemplate() {
 
         <FinancialSummary />
         <QuickActions />
-        <RecentTransactions transactions={recentTransactions} />
+        <RecentTransactions
+          transactions={recentTransactions as Transaction[]}
+        />
       </div>
     </main>
   )
