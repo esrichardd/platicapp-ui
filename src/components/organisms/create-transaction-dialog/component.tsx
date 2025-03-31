@@ -53,7 +53,7 @@ export function CreateTransactionDialog({
         type: type,
       })
     }
-  }, [open, mode, initialData])
+  }, [open, mode, initialData, type])
 
   const handleChange = (
     field: keyof TransactionInput,
@@ -84,23 +84,6 @@ export function CreateTransactionDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      {/* <DialogTrigger asChild>
-        {trigger ?? (
-          <Button className='w-full sm:w-auto'>
-            {mode === 'create' ? (
-              <>
-                <Plus className='mr-2 h-4 w-4' />
-                Agregar {capitalizedType}
-              </>
-            ) : (
-              <>
-                <Pencil className='mr-2 h-4 w-4' />
-                Editar {capitalizedType}
-              </>
-            )}
-          </Button>
-        )}
-      </DialogTrigger> */}
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
           <DialogTitle>
