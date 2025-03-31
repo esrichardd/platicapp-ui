@@ -80,24 +80,34 @@ export function AccountTable({
             <Table className='w-full table-fixed'>
               <TableHeader>
                 <TableRow>
-                  <TableHead className='w-[30%]'>Nombre de la Cuenta</TableHead>
-                  <TableHead className='w-[20%]'>Número de Cuenta</TableHead>
-                  <TableHead className='w-[15%]'>Tipo</TableHead>
-                  <TableHead className='w-[25%] text-right'>Saldo</TableHead>
-                  <TableHead className='w-[10%]'></TableHead>
+                  <TableHead className='w-[30%] min-w-[120px]'>
+                    Nombre de la Cuenta
+                  </TableHead>
+                  <TableHead className='hidden md:table-cell w-[20%]'>
+                    Número de Cuenta
+                  </TableHead>
+                  <TableHead className='hidden md:table-cell w-[15%]'>
+                    Tipo
+                  </TableHead>
+                  <TableHead className='w-[25%] text-right min-w-[100px]'>
+                    Saldo
+                  </TableHead>
+                  <TableHead className='w-[10%] min-w-[40px]'></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {accounts.map((account) => (
                   <TableRow key={account.id}>
-                    <TableCell className='font-medium'>
+                    <TableCell className='font-medium truncate'>
                       {account.name}
                     </TableCell>
-                    <TableCell>{account.accountNumber}</TableCell>
-                    <TableCell>
+                    <TableCell className='hidden md:table-cell truncate'>
+                      {account.accountNumber}
+                    </TableCell>
+                    <TableCell className='hidden md:table-cell'>
                       <Badge variant='outline'>{account.type}</Badge>
                     </TableCell>
-                    <TableCell className='text-right font-medium'>
+                    <TableCell className='text-right font-medium whitespace-nowrap'>
                       {account.currency} {account.balance.toFixed(2)}
                     </TableCell>
                     <TableCell>
