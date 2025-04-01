@@ -1,10 +1,10 @@
-import { DashboardPageLayout } from '@/components/layouts'
-import { AccountsTemplate } from '@/components/templates'
+import { AccountsTemplate } from '@/components/accounts'
+import { HeaderLayout } from '@/components/common/layouts'
 
 export default function AccountsPage() {
   return (
-    <DashboardPageLayout title='Cuentas'>
+    <HeaderLayout title='Cuentas'>
       <AccountsTemplate />
-    </DashboardPageLayout>
+    </HeaderLayout>
   )
 }

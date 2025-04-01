@@ -1,10 +1,10 @@
-import { DashboardPageLayout } from '@/components/layouts'
-import { DashboardTemplate } from '@/components/templates'
+import { HeaderLayout } from '@/components/common/layouts'
+import { DashboardTemplate } from '@/components/dashboard'
 
 export default function DashboardPage() {
   return (
-    <DashboardPageLayout title='Dashboard'>
+    <HeaderLayout title='Dashboard'>
       <DashboardTemplate />
-    </DashboardPageLayout>
+    </HeaderLayout>
   )
 }

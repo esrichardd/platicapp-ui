@@ -1,10 +1,10 @@
-import { DashboardPageLayout } from '@/components/layouts'
-import { CategoriesTemplate } from '@/components/templates'
+import { CategoriesTemplate } from '@/components/categories'
+import { HeaderLayout } from '@/components/common/layouts'
 
 export default function CategoriesPage() {
   return (
-    <DashboardPageLayout title='Categorías'>
+    <HeaderLayout title='Categorías'>
       <CategoriesTemplate />
-    </DashboardPageLayout>
+    </HeaderLayout>
   )
 }
