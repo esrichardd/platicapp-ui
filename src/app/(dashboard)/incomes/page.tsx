@@ -1,10 +1,10 @@
-import { DashboardPageLayout } from '@/components/layouts'
-import { IncomesTemplate } from '@/components/templates'
+import { HeaderLayout } from '@/components/common/layouts'
+import { IncomesTemplate } from '@/components/incomes'
 
 export default function IncomesPage() {
   return (
-    <DashboardPageLayout title='Gestionar Ingresos'>
+    <HeaderLayout title='Gestionar Ingresos'>
       <IncomesTemplate />
-    </DashboardPageLayout>
+    </HeaderLayout>
   )
 }

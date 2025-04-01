@@ -1,10 +1,10 @@
-import { DashboardPageLayout } from '@/components/layouts'
-import { ExpensesTemplate } from '@/components/templates'
+import { HeaderLayout } from '@/components/common/layouts'
+import { ExpensesTemplate } from '@/components/expenses'
 
 export default function ExpensesPage() {
   return (
-    <DashboardPageLayout title='Gestionar Gastos'>
+    <HeaderLayout title='Gestionar Gastos'>
       <ExpensesTemplate />
-    </DashboardPageLayout>
+    </HeaderLayout>
   )
 }

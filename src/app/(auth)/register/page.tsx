@@ -1,5 +1,5 @@
-import { RegisterForm } from '@/components/organisms'
+import { RegisterTemplate } from '@/components/register'
 
 export default function RegisterPage() {
-  return <RegisterForm />
+  return <RegisterTemplate />
 }
