@@ -1,6 +1,5 @@
 export const ENTRIES_PER_PAGE_OPTIONS = [5, 10, 25, 50]
 
-// Lista de países para el selector
 export const COUNTRIES = [
   'Estados Unidos',
   'Reino Unido',
@@ -18,25 +17,24 @@ export const COUNTRIES = [
 
 // Lista de monedas para el selector
 export const CURRENCIES = [
-  { code: 'USD', name: 'Dólar Estadounidense' },
-  { code: 'EUR', name: 'Euro' },
-  { code: 'GBP', name: 'Libra Esterlina' },
-  { code: 'JPY', name: 'Yen Japonés' },
-  { code: 'CAD', name: 'Dólar Canadiense' },
-  { code: 'AUD', name: 'Dólar Australiano' },
-  { code: 'CHF', name: 'Franco Suizo' },
-  { code: 'CNY', name: 'Yuan Chino' },
-  { code: 'ARS', name: 'Peso Argentino' },
-  { code: 'BRL', name: 'Real Brasileño' },
-  { code: 'MXN', name: 'Peso Mexicano' },
-  { code: 'CLP', name: 'Peso Chileno' },
-  { code: 'COP', name: 'Peso Colombiano' },
-  { code: 'PEN', name: 'Sol Peruano' },
-  { code: 'UYU', name: 'Peso Uruguayo' },
-  { code: 'VEF', name: 'Bolívar Venezolano' },
+  { code: 'USD', name: 'Dólar Estadounidense', symbol: '$' },
+  { code: 'EUR', name: 'Euro', symbol: '€' },
+  { code: 'GBP', name: 'Libra Esterlina', symbol: '£' },
+  { code: 'JPY', name: 'Yen Japonés', symbol: '¥' },
+  { code: 'CAD', name: 'Dólar Canadiense', symbol: 'C$' },
+  { code: 'AUD', name: 'Dólar Australiano', symbol: 'A$' },
+  { code: 'CHF', name: 'Franco Suizo', symbol: 'Fr' },
+  { code: 'CNY', name: 'Yuan Chino', symbol: '¥' },
+  { code: 'ARS', name: 'Peso Argentino', symbol: '$' },
+  { code: 'BRL', name: 'Real Brasileño', symbol: 'R$' },
+  { code: 'MXN', name: 'Peso Mexicano', symbol: '$' },
+  { code: 'CLP', name: 'Peso Chileno', symbol: '$' },
+  { code: 'COP', name: 'Peso Colombiano', symbol: '$' },
+  { code: 'PEN', name: 'Sol Peruano', symbol: 'S/' },
+  { code: 'UYU', name: 'Peso Uruguayo', symbol: '$' },
+  { code: 'VEF', name: 'Bolívar Venezolano', symbol: 'Bs' },
 ]
 
-// Tipos de cuenta para el selector
 export const ACCOUNT_TYPES = [
   'Corriente',
   'Ahorro',
@@ -44,4 +42,9 @@ export const ACCOUNT_TYPES = [
   'Tarjeta de Crédito',
   'Préstamo',
   'Criptomonedas',
+]
+
+export const LANGUAGES = [
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Español' },
 ]
