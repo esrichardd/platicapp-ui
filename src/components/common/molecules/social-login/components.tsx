@@ -1,6 +1,9 @@
+import { useTranslations } from 'next-intl'
 import { SocialLoginButton } from '@/components/common/atoms'
 
 export function SocialLogin() {
+  const t = useTranslations('socialAuth')
+
   return (
     <div className='flex flex-col gap-4'>
       <SocialLoginButton
@@ -12,7 +15,7 @@ export function SocialLogin() {
             />
           </svg>
         }
-        text='Inicia sesión con Apple'
+        text={t('apple')}
       />
       <SocialLoginButton
         icon={
@@ -23,7 +26,7 @@ export function SocialLogin() {
             />
           </svg>
         }
-        text='Inicia sesión con Google'
+        text={t('google')}
       />
     </div>
   )

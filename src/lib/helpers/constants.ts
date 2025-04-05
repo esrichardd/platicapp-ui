@@ -15,7 +15,6 @@ export const COUNTRIES = [
   'México',
 ]
 
-// Lista de monedas para el selector
 export const CURRENCIES = [
   { code: 'USD', name: 'Dólar Estadounidense', symbol: '$' },
   { code: 'EUR', name: 'Euro', symbol: '€' },

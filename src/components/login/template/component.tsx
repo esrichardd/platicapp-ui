@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/helpers/shadcn-utils'
 import { TermsAndConditions, TextDivider } from '@/components/common/atoms'
 import { SocialLogin } from '@/components/common/molecules'
@@ -16,6 +17,7 @@ import { useLoginLogic } from './use-login-logic'
 export function LoginTemplate({
   className,
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const t = useTranslations('login')
   const { loginProperties, setLoginProperties, isLoading, handleLogin } =
     useLoginLogic()
 
@@ -23,16 +25,14 @@ export function LoginTemplate({
     <div className={cn('flex flex-col gap-6', className)}>
       <Card>
         <CardHeader className='text-center'>
-          <CardTitle className='text-xl'>Bienvenido de nuevo</CardTitle>
-          <CardDescription>
-            Inicia sesión con tu cuenta de Apple o Google
-          </CardDescription>
+          <CardTitle className='text-xl'>{t('title')}</CardTitle>
+          <CardDescription>{t('subtitle')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
             <div className='grid gap-6'>
               <SocialLogin />
-              <TextDivider text='O continua con' />
+              <TextDivider text={t('or')} />
               <LoginFields
                 email={loginProperties.email}
                 setEmail={(email) =>

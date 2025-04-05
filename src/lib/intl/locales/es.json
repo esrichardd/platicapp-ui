@@ -1,0 +1,20 @@
+{
+  "socialAuth": {
+    "apple": "Inicia sesión con Apple",
+    "google": "Inicia sesión con Google"
+  },
+  "loginActions": {
+    "signIn": "Iniciar sesión",
+    "loading": "Cargando",
+    "noAccount": "¿No tienes una cuenta? ",
+    "register": "Regístrate"
+  },
+  "login": {
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Inicia sesión con tu cuenta de Apple o Google",
+    "or": "O continua con",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
+  }
+}
