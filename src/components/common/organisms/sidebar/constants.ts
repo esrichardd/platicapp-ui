@@ -1,4 +1,5 @@
 import {
+  BarChart,
   DollarSign,
   HelpCircle,
   Home,
@@ -6,7 +7,6 @@ import {
   Receipt,
   Settings,
   Tags,
-  User,
   Wallet,
 } from 'lucide-react'
 
@@ -47,6 +47,11 @@ export const NAVIGATION_ITEMS = [
         path: '/categories',
         icon: Tags,
       },
+      {
+        label: 'Reportes',
+        path: '#',
+        icon: BarChart,
+      },
     ],
   },
   {
@@ -54,13 +59,8 @@ export const NAVIGATION_ITEMS = [
     basePath: '#',
     items: [
       {
-        label: 'Perfil',
-        path: '#',
-        icon: User,
-      },
-      {
         label: 'Configuración',
-        path: '#',
+        path: '/settings',
         icon: Settings,
       },
       {
