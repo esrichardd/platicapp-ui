@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { Loader2 } from 'lucide-react'
+import { Link } from '@/lib/intl/routing'
 import { Button } from '@/components/common/ui/button'
 import { LoginActionsProps } from './types'
 

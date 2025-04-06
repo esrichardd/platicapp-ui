@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/lib/intl/routing'
 import { Button } from '@/components/common/ui/button'
 import { RegisterActionsProps } from './types'
 
