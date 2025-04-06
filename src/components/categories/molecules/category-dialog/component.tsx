@@ -33,7 +33,6 @@ import {
 } from '@/components/common/ui/popover'
 import { CategoryDialogProps } from './types'
 
-// Iconos disponibles para categorías y subcategorías
 const availableIcons = [
   { name: 'Compras', icon: <Grid className='h-4 w-4' /> },
   { name: 'Comida', icon: <Calendar className='h-4 w-4' /> },
@@ -45,7 +44,6 @@ const availableIcons = [
   { name: 'Otro', icon: <DollarSign className='h-4 w-4' /> },
 ]
 
-// Colores disponibles para categorías y subcategorías
 const availableColors = [
   { name: 'Red', value: '#ef4444', class: 'bg-red-500' },
   { name: 'Orange', value: '#f97316', class: 'bg-orange-500' },

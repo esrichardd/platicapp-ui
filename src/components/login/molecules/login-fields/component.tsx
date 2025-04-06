@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { TextInput } from '@/components/common/atoms'
 import { LoginFieldsProps } from './types'
 
@@ -7,11 +8,13 @@ export function LoginFields({
   password,
   setPassword,
 }: LoginFieldsProps) {
+  const t = useTranslations('login')
+
   return (
     <div className='grid gap-6'>
       <TextInput
         id='email'
-        label='Correo electrónico'
+        label={t('email')}
         type='email'
         placeholder='m@example.com'
         required
@@ -20,7 +23,7 @@ export function LoginFields({
       />
       <TextInput
         id='password'
-        label='Contraseña'
+        label={t('password')}
         type='password'
         required
         value={password}

@@ -39,8 +39,6 @@ export function PasswordChangeCard() {
       new: form.newPassword,
     })
 
-    // Aquí iría tu lógica para llamar al backend
-
     setSuccess(true)
     setForm({
       currentPassword: '',

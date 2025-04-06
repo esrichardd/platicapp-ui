@@ -41,5 +41,4 @@ export const EXPENSES_MOCK: Transaction[] = [
     account: 'Cuenta principal',
     status: 'Completado',
   },
-  // Puedes agregar más gastos aquí...
 ]
