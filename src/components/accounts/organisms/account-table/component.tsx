@@ -99,16 +99,16 @@ export function AccountTable({
                 {accounts.map((account) => (
                   <TableRow key={account.id}>
                     <TableCell className='font-medium truncate'>
-                      {account.name}
+                      {account.account_name}
                     </TableCell>
                     <TableCell className='hidden md:table-cell truncate'>
-                      {account.accountNumber}
+                      {account.account_number}
                     </TableCell>
                     <TableCell className='hidden md:table-cell'>
-                      <Badge variant='outline'>{account.type}</Badge>
+                      <Badge variant='outline'>{account.account_type}</Badge>
                     </TableCell>
                     <TableCell className='text-right font-medium whitespace-nowrap'>
-                      {account.currency} {account.balance.toFixed(2)}
+                      {selectedBank.currency} {account.balance.toFixed(2)}
                     </TableCell>
                     <TableCell>
                       <DropdownMenu>

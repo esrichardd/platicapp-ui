@@ -1,29 +1,29 @@
 export const ENTRIES_PER_PAGE_OPTIONS = [5, 10, 25, 50]
 
 export const COUNTRIES = [
-  'Estados Unidos',
-  'Reino Unido',
-  'España',
   'Alemania',
+  'Argentina',
+  'Brasil',
+  'Canadá',
+  'Chile',
+  'Colombia',
+  'Ecuador',
+  'España',
+  'Estados Unidos',
   'Francia',
   'Italia',
-  'Canadá',
-  'Australia',
-  'Japón',
-  'China',
-  'Brasil',
   'México',
+  'Perú',
+  'Reino Unido',
+  'Uruguay',
+  'Venezuela',
 ]
 
 export const CURRENCIES = [
   { code: 'USD', name: 'Dólar Estadounidense', symbol: '$' },
   { code: 'EUR', name: 'Euro', symbol: '€' },
   { code: 'GBP', name: 'Libra Esterlina', symbol: '£' },
-  { code: 'JPY', name: 'Yen Japonés', symbol: '¥' },
   { code: 'CAD', name: 'Dólar Canadiense', symbol: 'C$' },
-  { code: 'AUD', name: 'Dólar Australiano', symbol: 'A$' },
-  { code: 'CHF', name: 'Franco Suizo', symbol: 'Fr' },
-  { code: 'CNY', name: 'Yuan Chino', symbol: '¥' },
   { code: 'ARS', name: 'Peso Argentino', symbol: '$' },
   { code: 'BRL', name: 'Real Brasileño', symbol: 'R$' },
   { code: 'MXN', name: 'Peso Mexicano', symbol: '$' },
@@ -34,14 +34,7 @@ export const CURRENCIES = [
   { code: 'VEF', name: 'Bolívar Venezolano', symbol: 'Bs' },
 ]
 
-export const ACCOUNT_TYPES = [
-  'Corriente',
-  'Ahorro',
-  'Inversión',
-  'Tarjeta de Crédito',
-  'Préstamo',
-  'Criptomonedas',
-]
+export const ACCOUNT_TYPES = ['Corriente', 'Ahorro', 'Inversión']
 
 export const LANGUAGES = [
   { code: 'en', name: 'English' },

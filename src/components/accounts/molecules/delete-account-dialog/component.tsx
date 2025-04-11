@@ -24,7 +24,7 @@ export function DeleteAccountDialog({
           <DialogTitle>Eliminar Cuenta</DialogTitle>
           <DialogDescription>
             Esta acción eliminará permanentemente la cuenta{' '}
-            <strong>{account.name}</strong>. ¿Deseas continuar?
+            <strong>{account.account_name}</strong>. ¿Deseas continuar?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

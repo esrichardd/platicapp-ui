@@ -1,9 +1,9 @@
 export type Bank = {
-  id: number
+  id: string
   name: string
   country: string
   currency: string
-  logo?: string
+  image_url?: string
 }
 
 export type BankInput = Omit<Bank, 'id'>
