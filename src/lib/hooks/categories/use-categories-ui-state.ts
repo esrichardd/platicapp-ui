@@ -34,7 +34,7 @@ export function useCategoriesUiState(
         .toLowerCase()
         .includes(searchTerm.toLowerCase())
       const matchesCategory = selectedCategoryId
-        ? sub.parentCategoryId === selectedCategoryId
+        ? sub.category_id === selectedCategoryId
         : true
       return matchesSearch && matchesCategory
     })
