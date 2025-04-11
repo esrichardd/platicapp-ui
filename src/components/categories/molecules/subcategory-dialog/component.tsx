@@ -14,7 +14,7 @@ import {
   Wallet,
 } from 'lucide-react'
 import { getIconByName } from '@/lib/helpers/get-icon-by-name'
-import { Subcategory } from '@/lib/sdk-types'
+import { SubcategoryInput } from '@/lib/sdk-types'
 import { Button } from '@/components/common/ui/button'
 import {
   Dialog,
@@ -82,13 +82,12 @@ export function SubcategoryDialog({
   categories,
   onSubmit,
 }: SubcategoryDialogProps) {
-  const [formData, setFormData] = useState<Subcategory>({
-    id: 0,
+  const [formData, setFormData] = useState<SubcategoryInput>({
     name: '',
     icon: '',
     color: '',
     description: '',
-    parentCategoryId: 0,
+    category_id: '',
   })
 
   useEffect(() => {
@@ -106,19 +105,18 @@ export function SubcategoryDialog({
       !formData.name ||
       !formData.icon ||
       !formData.color ||
-      !formData.parentCategoryId
+      !formData.category_id
     ) {
       alert('Por favor completa todos los campos requeridos.')
       return
     }
     onSubmit(formData)
     setFormData({
-      id: 0,
       name: '',
       icon: '',
       color: '',
       description: '',
-      parentCategoryId: 0,
+      category_id: '',
     })
     onOpenChange(false)
   }
@@ -144,21 +142,15 @@ export function SubcategoryDialog({
               Categoría
             </Label>
             <Select
-              value={
-                formData.parentCategoryId
-                  ? formData.parentCategoryId.toString()
-                  : ''
-              }
-              onValueChange={(value) =>
-                handleChange('parentCategoryId', parseInt(value))
-              }
+              value={formData.category_id ? formData.category_id : ''}
+              onValueChange={(value) => handleChange('category_id', value)}
             >
               <SelectTrigger id='subcategory-category' className='col-span-3'>
                 <SelectValue placeholder='Seleccionar categoría padre' />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((category) => (
-                  <SelectItem key={category.id} value={category.id.toString()}>
+                  <SelectItem key={category.id} value={category.id}>
                     {category.name}
                   </SelectItem>
                 ))}

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { GalleryVerticalEnd } from 'lucide-react'
-import { logout } from '@/services/auth/logout'
+import { logout } from '@/services/authentication'
 import { UserProfileCard } from '@/components/common/atoms'
 import { SidebarNavigation } from '@/components/common/molecules'
 import {

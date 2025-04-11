@@ -5,5 +5,5 @@ export type CategoryCardProps = {
   subcategoriesCount: number
   onEdit: (category: Category) => void
   onDelete: (category: Category) => void
-  onViewSubcategories: (categoryId: number) => void
+  onViewSubcategories: (categoryId: string) => void
 }

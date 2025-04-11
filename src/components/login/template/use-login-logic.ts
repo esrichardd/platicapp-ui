@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { login } from '@/services/auth/login'
+import { login } from '@/services/authentication'
 import { LoginProperties } from './type'
 
 export function useLoginLogic() {
