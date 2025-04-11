@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { register } from '@/services/auth/register'
+import { register } from '@/services/authentication'
 import { cn } from '@/lib/helpers/shadcn-utils'
 import { TermsAndConditions, TextDivider } from '@/components/common/atoms'
 import { SocialLogin } from '@/components/common/molecules'

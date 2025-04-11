@@ -14,7 +14,7 @@ import {
   Wallet,
 } from 'lucide-react'
 import { getIconByName } from '@/lib/helpers/get-icon-by-name'
-import { Category } from '@/lib/sdk-types'
+import { CategoryInput } from '@/lib/sdk-types'
 import { Button } from '@/components/common/ui/button'
 import {
   Dialog,
@@ -72,8 +72,7 @@ export function CategoryDialog({
   initialData,
   onSubmit,
 }: CategoryDialogProps) {
-  const [formData, setFormData] = useState<Category>({
-    id: 0,
+  const [formData, setFormData] = useState<CategoryInput>({
     name: '',
     icon: '',
     color: '',
@@ -96,7 +95,12 @@ export function CategoryDialog({
       return
     }
     onSubmit(formData)
-    setFormData({ id: 0, name: '', icon: '', color: '', description: '' })
+    setFormData({
+      name: '',
+      icon: '',
+      color: '',
+      description: '',
+    })
     onOpenChange(false)
   }
 

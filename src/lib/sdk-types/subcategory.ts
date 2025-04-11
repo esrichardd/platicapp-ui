@@ -1,10 +1,10 @@
 export type Subcategory = {
-  id: number
+  id: string
   name: string
   icon: string
   color: string
   description?: string
-  parentCategoryId: number
+  category_id: string
 }
 
 export type SubcategoryInput = Omit<Subcategory, 'id'>
