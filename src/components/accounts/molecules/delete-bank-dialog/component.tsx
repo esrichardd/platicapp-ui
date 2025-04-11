@@ -22,7 +22,7 @@ export function DeleteBankDialog({
 }: DeleteBankDialogProps) {
   if (!bank) return null
 
-  const hasAccounts = accounts.some((acc) => acc.bankId === bank.id)
+  const hasAccounts = accounts.some((acc) => acc.bank_id === bank.id)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -39,7 +39,7 @@ export function DeleteBankDialog({
           <div className='flex items-center gap-3 rounded-lg border p-3'>
             <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-md border bg-background'>
               <Image
-                src={bank.logo || '/placeholder.svg'}
+                src={bank.image_url ?? '/no-image.png'}
                 alt={bank.name}
                 width={40}
                 height={40}

@@ -61,7 +61,7 @@ export function BankList({
                   >
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-md border bg-background'>
                       <Image
-                        src={bank.logo || '/placeholder.svg'}
+                        src={bank.image_url ?? '/no-image.png'}
                         alt={bank.name}
                         width={40}
                         height={40}

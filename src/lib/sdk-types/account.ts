@@ -1,11 +1,11 @@
 export type Account = {
-  id: number
-  bankId: number
-  name: string
-  accountNumber: string
-  type: string
+  id: string
+  bank_id: string
+  account_name: string
+  account_number: string
+  account_type: string
+  description: string
   balance: number
-  currency: string
 }
 
 export type AccountInput = Omit<Account, 'id'>

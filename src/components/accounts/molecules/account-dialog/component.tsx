@@ -32,12 +32,12 @@ export function AccountDialog({
   mode,
 }: AccountDialogProps) {
   const [form, setForm] = useState<AccountInput>({
-    name: '',
-    accountNumber: '',
-    type: '',
+    account_name: '',
+    account_number: '',
     balance: 0,
-    currency: '',
-    bankId: 0,
+    account_type: '',
+    description: '',
+    bank_id: '',
   })
 
   useEffect(() => {
@@ -45,12 +45,12 @@ export function AccountDialog({
       setForm(initialData)
     } else if (!open && mode === 'create') {
       setForm({
-        name: '',
-        accountNumber: '',
-        type: '',
-        currency: '',
+        account_name: '',
+        account_number: '',
+        account_type: '',
+        description: '',
         balance: 0,
-        bankId: selectedBank?.id || 0,
+        bank_id: selectedBank?.id || '',
       })
     }
   }, [open, mode, initialData, selectedBank])
@@ -60,7 +60,12 @@ export function AccountDialog({
   }
 
   const handleSubmit = () => {
-    if (!form.name || !form.accountNumber || !form.type || !form.balance) {
+    if (
+      !form.account_name ||
+      !form.account_number ||
+      !form.account_type ||
+      !form.balance
+    ) {
       alert('Por favor completa todos los campos')
       return
     }
@@ -90,8 +95,8 @@ export function AccountDialog({
               id='account-name'
               placeholder='Cuenta Corriente Principal'
               className='col-span-3'
-              value={form.name}
-              onChange={(e) => handleChange('name', e.target.value)}
+              value={form.account_name}
+              onChange={(e) => handleChange('account_name', e.target.value)}
             />
           </div>
           <div className='grid grid-cols-4 items-center gap-4'>
@@ -102,8 +107,8 @@ export function AccountDialog({
               id='account-number'
               placeholder='****1234'
               className='col-span-3'
-              value={form.accountNumber}
-              onChange={(e) => handleChange('accountNumber', e.target.value)}
+              value={form.account_number}
+              onChange={(e) => handleChange('account_number', e.target.value)}
             />
           </div>
           <div className='grid grid-cols-4 items-center gap-4'>
@@ -111,8 +116,8 @@ export function AccountDialog({
               Tipo
             </Label>
             <Select
-              value={form.type}
-              onValueChange={(value) => handleChange('type', value)}
+              value={form.account_type}
+              onValueChange={(value) => handleChange('account_type', value)}
             >
               <SelectTrigger id='account-type' className='col-span-3'>
                 <SelectValue placeholder='Seleccionar tipo de cuenta' />
