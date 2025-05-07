@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { ENTRIES_PER_PAGE_OPTIONS } from '@/lib/helpers/constants'
 import { Button } from '@/components/common/ui/button'
@@ -18,6 +19,7 @@ export function PaginationControls({
   onChangeEntriesPerPage,
 }: PaginationControlsProps) {
   const { currentPage, totalPages, entriesPerPage, totalItems } = pagination
+  const t = useTranslations('transactions.pagination')
 
   const start = totalItems === 0 ? 0 : (currentPage - 1) * entriesPerPage + 1
   const end = Math.min(currentPage * entriesPerPage, totalItems)
@@ -55,15 +57,15 @@ export function PaginationControls({
   return (
     <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
       <div className='flex flex-wrap items-center gap-2 text-sm text-muted-foreground'>
-        <span>Mostrando</span>
+        <span>{t('showing')}</span>
         <strong>{start}</strong>
         <span>a</span>
         <strong>{end}</strong>
-        <span>de</span>
+        <span>{t('of')}</span>
         <strong>{totalItems}</strong>
-        <span>registros</span>
+        <span>{t('records')}</span>
 
-        <span className='ml-4'>Mostrar</span>
+        <span className='ml-4'>{t('show')}</span>
         <Select
           value={entriesPerPage.toString()}
           onValueChange={(value) => onChangeEntriesPerPage(parseInt(value))}
@@ -79,7 +81,7 @@ export function PaginationControls({
             ))}
           </SelectContent>
         </Select>
-        <span>por página</span>
+        <span>{t('perPage')}</span>
       </div>
 
       <div className='flex items-center gap-2'>
@@ -90,7 +92,7 @@ export function PaginationControls({
           onClick={() => onChangePage(currentPage - 1)}
         >
           <ChevronLeft className='w-4 h-4 mr-1' />
-          <span className='hidden sm:inline'>Anterior</span>
+          <span className='hidden sm:inline'>{t('previous')}</span>
         </Button>
 
         {generatePageNumbers().map((page) => (
@@ -111,7 +113,7 @@ export function PaginationControls({
           disabled={currentPage === totalPages || totalPages === 0}
           onClick={() => onChangePage(currentPage + 1)}
         >
-          <span className='hidden sm:inline'>Siguiente</span>
+          <span className='hidden sm:inline'>{t('next')}</span>
           <ChevronRight className='w-4 h-4 ml-1' />
         </Button>
       </div>

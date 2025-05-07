@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ArrowRightLeft, Copy, MoreHorizontal, Trash2 } from 'lucide-react'
-import { TransactionInput } from '@/lib/sdk-types'
+import { TransactionInput, TransactionWithRelations } from '@/lib/sdk-types'
 import { TransactionDialog } from '@/components/common/molecules'
-import { Badge } from '@/components/common/ui/badge'
 import { Button } from '@/components/common/ui/button'
 import { Checkbox } from '@/components/common/ui/checkbox'
 import {
@@ -33,15 +33,17 @@ export function TransactionTable({
   onBulkAction,
   onEdit,
 }: TransactionTableProps) {
+  const t = useTranslations('transactions.table')
+
   const allSelected =
     transactions.length > 0 && selectedItems.length === transactions.length
   const [editingTransaction, setEditingTransaction] = useState<{
-    id: number
-    data: TransactionInput
+    id: string
+    data: TransactionWithRelations
   } | null>(null)
 
-  const handleEdit = (data: TransactionInput) => {
-    onEdit?.(12, data)
+  const handleEdit = (data: TransactionInput & { id: string }) => {
+    onEdit?.(data.id, data)
     setEditingTransaction(null)
   }
 
@@ -49,7 +51,7 @@ export function TransactionTable({
     <div className='border rounded-md overflow-auto'>
       <div className='flex items-center justify-between px-4 py-2 border-b bg-muted'>
         <span className='text-sm font-medium'>
-          {selectedItems.length} elementos seleccionados
+          {selectedItems.length} {t('selected')}
         </span>
         <div className='flex gap-2'>
           <Button
@@ -59,7 +61,7 @@ export function TransactionTable({
             disabled={selectedItems.length === 0}
           >
             <Copy className='w-4 h-4 mr-1' />
-            Duplicar
+            {t('duplicate')}
           </Button>
           <Button
             size='sm'
@@ -68,7 +70,7 @@ export function TransactionTable({
             disabled={selectedItems.length === 0}
           >
             <ArrowRightLeft className='w-4 h-4 mr-1' />
-            Transferir
+            {t('transfer')}
           </Button>
           <Button
             size='sm'
@@ -77,7 +79,7 @@ export function TransactionTable({
             disabled={selectedItems.length === 0}
           >
             <Trash2 className='w-4 h-4 mr-1' />
-            Eliminar
+            {t('delete')}
           </Button>
         </div>
       </div>
@@ -90,14 +92,20 @@ export function TransactionTable({
                 onCheckedChange={onToggleSelectAll}
               />
             </TableHead>
-            <TableHead>Descripción</TableHead>
-            <TableHead className='hidden sm:table-cell'>Categoría</TableHead>
-            <TableHead className='hidden sm:table-cell'>Cuenta</TableHead>
-            <TableHead className='hidden sm:table-cell'>Fecha</TableHead>
-            <TableHead className='hidden sm:table-cell'>Estado</TableHead>
-            <TableHead className='text-right'>Monto</TableHead>
+            <TableHead>{t('description')}</TableHead>
+            <TableHead className='hidden sm:table-cell'>
+              {t('category')}
+            </TableHead>
+            <TableHead className='hidden sm:table-cell'>
+              {t('subcategory')}
+            </TableHead>
+            <TableHead className='hidden sm:table-cell'>
+              {t('account')}
+            </TableHead>
+            <TableHead className='hidden sm:table-cell'>{t('date')}</TableHead>
+            <TableHead className='text-right'>{t('amount')}</TableHead>
             <TableHead className='w-[60px] sticky right-0 bg-background'>
-              Acciones
+              {t('actions')}
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -105,7 +113,7 @@ export function TransactionTable({
           {transactions.length === 0 ? (
             <TableRow>
               <TableCell colSpan={8} className='h-24 text-center'>
-                No se encontraron transacciones.
+                {t('noTransactions')}
               </TableCell>
             </TableRow>
           ) : (
@@ -119,66 +127,76 @@ export function TransactionTable({
                 </TableCell>
                 <TableCell className='font-medium'>
                   <div className='flex flex-col'>
-                    <span className='truncate'>{item.description}</span>
+                    <span className='truncate'>{item.description || ''}</span>
                     <span className='text-sm text-muted-foreground sm:hidden'>
-                      {item.category} • {item.account} •{' '}
-                      {new Date(item.date).toLocaleDateString()}
+                      {item.category.name} • {item.bank_account.account_name} •{' '}
+                      {new Date(item.date).toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                      })}
                     </span>
                   </div>
                 </TableCell>
                 <TableCell className='hidden sm:table-cell'>
-                  {item.category}
+                  {item.category.name}
                 </TableCell>
                 <TableCell className='hidden sm:table-cell'>
-                  {item.account}
+                  {item.subcategory?.name || '-'}
                 </TableCell>
                 <TableCell className='hidden sm:table-cell'>
-                  {new Date(item.date).toLocaleDateString()}
+                  {item.bank_account.account_name}
                 </TableCell>
                 <TableCell className='hidden sm:table-cell'>
-                  <Badge
-                    variant={
-                      item.status === 'Completado' ? 'default' : 'secondary'
-                    }
-                  >
-                    {item.status}
-                  </Badge>
+                  {new Date(item.date).toLocaleDateString('es-ES', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                  })}
                 </TableCell>
                 <TableCell className='text-right text-green-600 font-medium'>
-                  ${item.amount.toFixed(2)}
+                  $
+                  {item.amount.toLocaleString('es-ES', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </TableCell>
                 <TableCell className='sticky right-0 bg-background'>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant='ghost' className='h-8 w-8 p-0'>
-                        <span className='sr-only'>Abrir menú</span>
+                        <span className='sr-only'>{t('openMenu')}</span>
                         <MoreHorizontal className='h-4 w-4' />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
-                      <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                      <DropdownMenuLabel>{t('actions')}</DropdownMenuLabel>
                       <DropdownMenuItem
                         onClick={() => {
                           setEditingTransaction({
                             id: item.id,
                             data: {
-                              type: 'income',
+                              ...item,
+                              type: item.type,
                               description: item.description,
                               amount: item.amount,
-                              account: item.account,
-                              category: item.category,
+                              bank_account_id: item.bank_account_id,
+                              category_id: item.category_id,
                               date: item.date,
                             },
                           })
                         }}
                       >
-                        Editar
+                        {t('edit')}
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Duplicar</DropdownMenuItem>
+                      <DropdownMenuItem>{t('duplicate')}</DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem className='text-red-600'>
+                      <DropdownMenuItem
+                        className='text-red-600'
+                        onClick={() => onBulkAction?.('delete', [item.id])}
+                      >
                         <Trash2 className='w-4 h-4 mr-2' />
-                        Eliminar
+                        {t('delete')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -199,7 +217,7 @@ export function TransactionTable({
             if (!open) setEditingTransaction(null)
           }}
           onSubmit={(data) => {
-            handleEdit(data)
+            handleEdit({ ...data, id: editingTransaction.data.id })
             setEditingTransaction(null)
           }}
         />

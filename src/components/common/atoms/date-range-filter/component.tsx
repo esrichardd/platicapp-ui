@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { CalendarIcon } from 'lucide-react'
 import { formatDate, formatDateLong } from '@/lib/helpers/formatters'
 import { Button } from '@/components/common/ui/button'
@@ -21,6 +22,7 @@ export function DateRangeFilter({
   const [open, setOpen] = useState(false)
   const [dateFromOpen, setDateFromOpen] = useState(false)
   const [dateToOpen, setDateToOpen] = useState(false)
+  const t = useTranslations('transactions.filters.date')
 
   const reset = () => onChange({ dateFrom: undefined, dateTo: undefined })
 
@@ -37,10 +39,10 @@ export function DateRangeFilter({
             {dateFrom && dateTo
               ? `${formatDate(dateFrom)} - ${formatDate(dateTo)}`
               : dateFrom
-                ? `Desde ${formatDate(dateFrom)}`
+                ? `${t('from')} ${formatDate(dateFrom)}`
                 : dateTo
-                  ? `Hasta ${formatDate(dateTo)}`
-                  : 'Rango de fechas'}
+                  ? `${t('to')} ${formatDate(dateTo)}`
+                  : t('range')}
           </span>
           <span className='sm:hidden'>Fechas</span>
         </Button>
@@ -48,10 +50,8 @@ export function DateRangeFilter({
 
       <PopoverContent className='w-auto p-0' align='start'>
         <div className='p-3 border-b'>
-          <h4 className='font-medium text-sm'>Filtrar por fecha</h4>
-          <p className='text-xs text-muted-foreground'>
-            Selecciona un rango de fechas para filtrar
-          </p>
+          <h4 className='font-medium text-sm'>{t('filter')}</h4>
+          <p className='text-xs text-muted-foreground'>{t('selectDate')}</p>
         </div>
 
         <div className='p-3 flex flex-col gap-4'>
@@ -114,10 +114,10 @@ export function DateRangeFilter({
               onClick={reset}
               disabled={!dateFrom && !dateTo}
             >
-              Reiniciar
+              {t('reset')}
             </Button>
             <Button size='sm' onClick={() => setOpen(false)}>
-              Aplicar
+              {t('apply')}
             </Button>
           </div>
         </div>

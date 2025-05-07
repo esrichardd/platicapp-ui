@@ -1,5 +1,5 @@
 export const CATEGORIES = {
-  income: [
+  INCOME: [
     'Empleo',
     'Autónomo',
     'Inversión',
@@ -7,7 +7,7 @@ export const CATEGORIES = {
     'Gobierno',
     'Personal',
   ],
-  expense: [
+  EXPENSE: [
     'Vivienda',
     'Alimentación',
     'Transporte',

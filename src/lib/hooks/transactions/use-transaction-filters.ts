@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import {
   FilterState,
   PaginationState,
-  Transaction,
+  TransactionWithRelations,
   UseTransactionFiltersResult,
 } from '@/lib/sdk-types'
 
 export function useTransactionFilters(
-  data: Transaction[],
+  data: TransactionWithRelations[],
 ): UseTransactionFiltersResult {
   const [filters, setFiltersState] = useState<FilterState>({
     searchTerm: '',
@@ -23,7 +23,7 @@ export function useTransactionFilters(
     entriesPerPage: 10,
   })
 
-  const [selectedItems, setSelectedItems] = useState<number[]>([])
+  const [selectedItems, setSelectedItems] = useState<string[]>([])
 
   const setFilters = (newFilters: Partial<FilterState>) => {
     setFiltersState((prev) => ({ ...prev, ...newFilters }))
@@ -38,21 +38,23 @@ export function useTransactionFilters(
     return data.filter((income) => {
       const matchesSearch =
         income.description
-          .toLowerCase()
+          ?.toLowerCase()
           .includes(filters.searchTerm.toLowerCase()) ||
-        income.category.toLowerCase().includes(filters.searchTerm.toLowerCase())
+        income.category.name
+          .toLowerCase()
+          .includes(filters.searchTerm.toLowerCase())
 
       const matchesCategory =
         filters.selectedCategory === 'Todas las categorías' ||
-        income.category === filters.selectedCategory
+        income.category.name === filters.selectedCategory
 
       const matchesAccount =
         filters.selectedAccount === 'Todas las cuentas' ||
-        income.account === filters.selectedAccount
+        income.bank_account.account_name === filters.selectedAccount
 
       const matchesStatus =
         filters.selectedStatus === 'Todos los estados' ||
-        income.status === filters.selectedStatus
+        income.type === filters.selectedStatus
 
       const incomeDate = new Date(income.date)
       const matchesDateFrom =
@@ -84,7 +86,7 @@ export function useTransactionFilters(
     }
   }, [totalPages, pagination.currentPage])
 
-  const toggleSelectItem = (id: number) => {
+  const toggleSelectItem = (id: string) => {
     setSelectedItems((prev) =>
       prev.includes(id)
         ? prev.filter((itemId) => itemId !== id)

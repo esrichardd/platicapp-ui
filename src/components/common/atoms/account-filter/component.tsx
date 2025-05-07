@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import {
   Select,
   SelectContent,
@@ -7,18 +8,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/common/ui/select'
-import { ACCOUNTS_MOCK } from './constants'
 import { AccountFilterProps } from './types'
 
 export function AccountFilter({
   value,
   onChange,
-  accounts = ACCOUNTS_MOCK,
+  accounts,
 }: AccountFilterProps) {
+  const t = useTranslations('transactions.filters')
+
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger className='h-8 w-[180px]'>
-        <SelectValue placeholder='Cuenta' />
+        <SelectValue placeholder={t('account')} />
       </SelectTrigger>
       <SelectContent>
         {accounts.map((account) => (

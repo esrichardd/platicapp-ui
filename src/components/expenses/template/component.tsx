@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import { useTransactionFilters } from '@/lib/hooks/use-transaction-filters'
+import { useTransactionFilters } from '@/lib/hooks/transactions/use-transaction-filters'
 import { Transaction } from '@/lib/sdk-types'
 import {
   PaginationControls,
