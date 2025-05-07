@@ -15,12 +15,10 @@ interface TransactionsProviderProps extends PropsWithChildren {
 const TransactionsContext = createContext<TransactionsContextValue | null>(null)
 
 export function TransactionsProvider({
-  initialData,
-  label,
   type,
   children,
 }: TransactionsProviderProps) {
-  const value = useTransactionsManager(initialData, { label, type })
+  const value = useTransactionsManager({ type })
   return (
     <TransactionsContext.Provider value={value}>
       {children}

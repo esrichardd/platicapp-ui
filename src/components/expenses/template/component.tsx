@@ -1,10 +1,9 @@
 'use client'
-'use client'
 
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
 import { useTransactionFilters } from '@/lib/hooks/transactions/use-transaction-filters'
-import { Transaction } from '@/lib/sdk-types'
+import { TransactionInput } from '@/lib/sdk-types'
 import {
   PaginationControls,
   TransactionDialog,
@@ -12,7 +11,6 @@ import {
 } from '@/components/common/molecules'
 import { TransactionTable } from '@/components/common/organisms'
 import { Button } from '@/components/common/ui/button'
-import { EXPENSES_MOCK } from './constants'
 
 export function ExpensesTemplate() {
   const {
@@ -26,19 +24,19 @@ export function ExpensesTemplate() {
     toggleSelectItem,
     toggleSelectAll,
     clearSelection,
-  } = useTransactionFilters(EXPENSES_MOCK)
+  } = useTransactionFilters([])
 
   const [isCreateOpen, setIsCreateOpen] = useState(false)
 
   const handleBulkAction = (
     action: 'delete' | 'duplicate' | 'transfer',
-    ids: number[],
+    ids: string[],
   ) => {
     alert(`${action.toUpperCase()} ${ids.length} gastos`)
     clearSelection()
   }
 
-  const handleCreate = (newExpense: Omit<Transaction, 'id' | 'status'>) => {
+  const handleCreate = (newExpense: TransactionInput) => {
     alert(`Gasto creado: ${JSON.stringify(newExpense, null, 2)}`)
     // Aquí puedes guardar el gasto en backend o estado global
   }
@@ -55,7 +53,7 @@ export function ExpensesTemplate() {
             Agregar Gasto
           </Button>
           <TransactionDialog
-            type='expense'
+            type='EXPENSE'
             mode='create'
             open={isCreateOpen}
             onOpenChange={setIsCreateOpen}

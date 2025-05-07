@@ -1,4 +1,4 @@
-import { Transaction } from '@/lib/sdk-types'
+import { TransactionWithRelations } from '@/lib/sdk-types'
 import { Badge } from '@/components/common/ui/badge'
 import { Button } from '@/components/common/ui/button'
 import {
@@ -11,7 +11,7 @@ import {
 } from '@/components/common/ui/card'
 
 type RecentTransactionsProps = {
-  transactions: Transaction[]
+  transactions: TransactionWithRelations[]
 }
 
 export function RecentTransactions({ transactions }: RecentTransactionsProps) {
@@ -32,12 +32,10 @@ export function RecentTransactions({ transactions }: RecentTransactionsProps) {
                 <div className='flex items-center gap-2'>
                   <Badge
                     variant={
-                      transaction.category === 'Income'
-                        ? 'default'
-                        : 'secondary'
+                      transaction.type === 'INCOME' ? 'default' : 'secondary'
                     }
                   >
-                    {transaction.category}
+                    {transaction.type === 'INCOME' ? 'Ingreso' : 'Gasto'}
                   </Badge>
                   <span className='font-medium'>{transaction.description}</span>
                 </div>
@@ -51,7 +49,7 @@ export function RecentTransactions({ transactions }: RecentTransactionsProps) {
                 </span>
               </div>
               <div className='flex items-center justify-between text-sm text-muted-foreground'>
-                <span>{transaction.account}</span>
+                <span>{transaction.bank_account.account_name}</span>
                 <span>{new Date(transaction.date).toLocaleDateString()}</span>
               </div>
             </div>
