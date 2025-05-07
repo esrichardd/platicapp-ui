@@ -16,5 +16,93 @@
     "email": "Email",
     "password": "Password",
     "forgotPassword": "Forgot your password?"
+  },
+  "transactions": {
+    "filters": {
+      "category": "Category",
+      "account": "Account",
+      "status": "Status",
+      "date": {
+        "from": "From",
+        "to": "To",
+        "range": "Date Range",
+        "filter": "Filter by date",
+        "selectDate": "Select a date range to filter",
+        "reset": "Reset",
+        "apply": "Apply"
+      }
+    },
+    "dialog": {
+      "save": "Save",
+      "update": "Update",
+      "description": "Description",
+      "descriptionPlaceholder": "E.g.: Salary, Rent...",
+      "amount": "Amount",
+      "category": "Category",
+      "account": "Account",
+      "date": "Date",
+      "selectCategory": "Select a category",
+      "selectAccount": "Select an account",
+      "incomes": {
+        "create": {
+          "title": "Add Income",
+          "description": "Add a new income to your account."
+        },
+        "edit": {
+          "title": "Edit Income",
+          "description": "Edit the income for your account."
+        }
+      },
+      "expenses": {
+        "create": {
+          "title": "Add Expense",
+          "description": "Add a new expense to your account."
+        },
+        "edit": {
+          "title": "Edit Expense",
+          "description": "Edit the expense for your account."
+        }
+      }
+    },
+    "pagination": {
+      "showing": "Showing",
+      "of": "of",
+      "records": "records",
+      "perPage": "per page",
+      "previous": "Previous",
+      "next": "Next",
+      "show": "Show"
+    },
+    "table": {
+      "selected": "items selected",
+      "actions": "Actions",
+      "delete": "Delete",
+      "duplicate": "Duplicate",
+      "transfer": "Transfer",
+      "edit": "Edit",
+      "noTransactions": "No transactions found.",
+      "openMenu": "Open menu",
+      "description": "Description",
+      "category": "Category",
+      "account": "Account",
+      "date": "Date",
+      "status": "Status",
+      "amount": "Amount"
+    }
+  },
+  "incomes": {
+    "title": "Manage Incomes",
+    "label": "Income",
+    "header": {
+      "create": "Add Income"
+    },
+    "dialog": {
+      "title": "Add Income",
+      "description": "Add a new income to your account."
+    },
+    "table": {
+      "title": "Incomes",
+      "description": "Shows all incomes from your account."
+    }
   }
 }

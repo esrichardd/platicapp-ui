@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Transaction } from '@/lib/sdk-types'
+import { TransactionWithRelations } from '@/lib/sdk-types'
 import {
   AccountSelector,
   FinancialSummary,
@@ -31,7 +31,7 @@ export function DashboardTemplate() {
         <FinancialSummary />
         <QuickActions />
         <RecentTransactions
-          transactions={RECENT_TRANSACTIONS as Transaction[]}
+          transactions={RECENT_TRANSACTIONS as TransactionWithRelations[]}
         />
       </div>
     </main>

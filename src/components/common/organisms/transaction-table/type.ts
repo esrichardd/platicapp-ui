@@ -1,12 +1,12 @@
-import { Transaction, TransactionInput } from '@/lib/sdk-types'
+import { TransactionInput, TransactionWithRelations } from '@/lib/sdk-types'
 
 type onBulkActionType = 'delete' | 'duplicate' | 'transfer'
 
 export type TransactionTableProps = {
-  transactions: Transaction[]
-  selectedItems: number[]
-  onToggleSelect: (id: number) => void
+  transactions: TransactionWithRelations[]
+  selectedItems: string[]
+  onToggleSelect: (id: string) => void
   onToggleSelectAll: () => void
-  onBulkAction?: (action: onBulkActionType, ids: number[]) => void
-  onEdit?: (id: number, data: TransactionInput) => void
+  onBulkAction?: (action: onBulkActionType, ids: string[]) => void
+  onEdit?: (id: string, data: TransactionInput & { id: string }) => void
 }

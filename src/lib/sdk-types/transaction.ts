@@ -1,14 +1,28 @@
-export type TransactionType = 'income' | 'expense'
+import { Account } from './account'
+import { Category } from './category'
+import { Subcategory } from './subcategory'
 
-export type Transaction = {
-  id: number
-  type: TransactionType
-  description: string
+export interface Transaction {
+  id: string
+  user_id: string
+  bank_account_id: string
+  category_id: string
+  subcategory_id?: string
+  description?: string
   amount: number
-  category: string
-  account: string
+  type: 'INCOME' | 'EXPENSE'
   date: string
-  status: string
+  created_at: string
+  updated_at: string
 }
 
-export type TransactionInput = Omit<Transaction, 'id' | 'status'>
+export type TransactionInput = Omit<
+  Transaction,
+  'id' | 'user_id' | 'created_at' | 'updated_at'
+>
+
+export type TransactionWithRelations = Transaction & {
+  category: Category
+  subcategory: Subcategory
+  bank_account: Account
+}

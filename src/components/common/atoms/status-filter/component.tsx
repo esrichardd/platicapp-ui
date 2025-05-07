@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import {
   Select,
   SelectContent,
@@ -7,18 +8,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/common/ui/select'
-import { STATUS_MOCK } from './constants'
 import { StatusFilterProps } from './types'
 
-export function StatusFilter({
-  value,
-  onChange,
-  statuses = STATUS_MOCK,
-}: StatusFilterProps) {
+export function StatusFilter({ value, onChange, statuses }: StatusFilterProps) {
+  const t = useTranslations('transactions.filters')
+
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger className='h-8 w-[180px]'>
-        <SelectValue placeholder='Estado' />
+        <SelectValue placeholder={t('status')} />
       </SelectTrigger>
       <SelectContent>
         {statuses.map((status) => (

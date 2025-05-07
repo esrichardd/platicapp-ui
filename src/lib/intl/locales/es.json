@@ -16,5 +16,96 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?"
+  },
+  "transactions": {
+    "filters": {
+      "category": "Categoría",
+      "account": "Cuenta",
+      "status": "Estado",
+      "date": {
+        "from": "Desde",
+        "to": "Hasta",
+        "range": "Rango de fechas",
+        "filter": "Filtrar por fecha",
+        "selectDate": "Selecciona un rango de fechas para filtrar",
+        "reset": "Reiniciar",
+        "apply": "Aplicar"
+      }
+    },
+    "dialog": {
+      "save": "Guardar",
+      "update": "Actualizar",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Ej: Salario, Alquiler...",
+      "amount": "Cantidad",
+      "category": "Categoría",
+      "subcategory": "Subcategoría",
+      "account": "Cuenta",
+      "date": "Fecha",
+      "selectCategory": "Selecciona una categoría",
+      "selectAccount": "Selecciona una cuenta",
+      "selectSubcategory": "Selecciona una subcategoría",
+      "income": {
+        "create": {
+          "title": "Agregar Ingreso",
+          "description": "Agrega un nuevo ingreso para tu cuenta."
+        },
+        "edit": {
+          "title": "Editar Ingreso",
+          "description": "Edita el ingreso para tu cuenta."
+        }
+      },
+      "expense": {
+        "create": {
+          "title": "Agregar Gasto",
+          "description": "Agrega un nuevo gasto para tu cuenta."
+        },
+        "edit": {
+          "title": "Editar Gasto",
+          "description": "Edita el gasto para tu cuenta."
+        }
+      }
+    },
+    "pagination": {
+      "showing": "Mostrando",
+      "of": "de",
+      "records": "registros",
+      "perPage": "por página",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "show": "Mostrar"
+    },
+    "table": {
+      "selected": "elementos seleccionados",
+      "actions": "Acciones",
+      "delete": "Eliminar",
+      "duplicate": "Duplicar",
+      "transfer": "Transferir",
+      "edit": "Editar",
+      "noTransactions": "No se encontraron transacciones.",
+      "openMenu": "Abrir menú",
+      "description": "Descripción",
+      "category": "Categoría",
+      "subcategory": "Subcategoría",
+      "account": "Cuenta",
+      "date": "Fecha",
+      "status": "Estado",
+      "amount": "Monto"
+    }
+  },
+  "incomes": {
+    "title": "Gestionar Ingresos",
+    "label": "Ingreso",
+    "header": {
+      "create": "Agregar Ingreso"
+    },
+    "dialog": {
+      "title": "Agregar Ingreso",
+      "description": "Agrega un nuevo ingreso para tu cuenta."
+    },
+    "table": {
+      "title": "Ingresos",
+      "description": "Muestra todos los ingresos de tu cuenta."
+    }
   }
 }

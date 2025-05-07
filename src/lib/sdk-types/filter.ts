@@ -1,4 +1,4 @@
-import { Transaction } from './transaction'
+import { TransactionWithRelations } from './transaction'
 
 export type FilterState = {
   searchTerm: string
@@ -15,14 +15,14 @@ export type PaginationState = {
 }
 
 export type UseTransactionFiltersResult = {
-  filteredData: Transaction[]
-  paginatedData: Transaction[]
+  filteredData: TransactionWithRelations[]
+  paginatedData: TransactionWithRelations[]
   filters: FilterState
   setFilters: (filters: Partial<FilterState>) => void
   pagination: PaginationState & { totalPages: number }
   setPagination: (pagination: Partial<PaginationState>) => void
-  selectedItems: number[]
-  toggleSelectItem: (id: number) => void
+  selectedItems: string[]
+  toggleSelectItem: (id: string) => void
   toggleSelectAll: () => void
   clearSelection: () => void
 }
